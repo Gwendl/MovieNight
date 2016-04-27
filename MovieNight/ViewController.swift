@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TMDBSwift
 
 class MainSplitView: UISplitViewController {
 

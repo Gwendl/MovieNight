@@ -1,0 +1,1 @@
+../../../TMDBSwift/Sources/TMDBSwift.h
