@@ -5,7 +5,8 @@
 
 target 'MovieNight' do
 
-pod "TMDBSwift"
+pod 'Alamofire', '~> 3.3'
+pod 'CryptoSwift'
 
 end
 

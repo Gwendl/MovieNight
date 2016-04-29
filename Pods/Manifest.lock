@@ -1,10 +1,13 @@
 PODS:
-  - TMDBSwift (0.1.0)
+  - Alamofire (3.3.1)
+  - CryptoSwift (0.4)
 
 DEPENDENCIES:
-  - TMDBSwift
+  - Alamofire (~> 3.3)
+  - CryptoSwift
 
 SPEC CHECKSUMS:
-  TMDBSwift: a65b87e68f5199c9e2f0aa9b13134d24c57349b8
+  Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
+  CryptoSwift: 584eac7d00b2f497fe7b20de271b8c0c52fff844
 
 COCOAPODS: 0.39.0
