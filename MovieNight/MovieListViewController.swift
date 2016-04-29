@@ -22,11 +22,13 @@ class MovieListTableViewController : UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 2
     }
     
+    var i = 0
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("movieCell", forIndexPath: indexPath) 
+        var name = "movieCell\(i++)"
+        let cell = tableView.dequeueReusableCellWithIdentifier(name, forIndexPath: indexPath)
         
         return cell
     }

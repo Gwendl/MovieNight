@@ -8,8 +8,11 @@
 
 import UIKit
 
+
 class MainSplitView: UISplitViewController {
 
+    static let appColor = UIColor(red: 0xFF / 255, green: 0x2D / 255, blue: 0x55 / 255, alpha: 0x00 / 255)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
