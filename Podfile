@@ -5,8 +5,11 @@
 
 target 'MovieNight' do
 
+<<<<<<< 66bb3d7562ee7ab1fc4d20cfea918ff90cfd6d1e
 pod 'Alamofire', '~> 3.3'
 pod 'CryptoSwift'
 
+=======
+>>>>>>> remove pod
 end
 

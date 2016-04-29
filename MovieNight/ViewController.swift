@@ -15,6 +15,18 @@ class MainSplitView: UISplitViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        let url = NSURL(string: "http://www.stackoverflow.com")
+        
+        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
+            print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+        }
+        
+        task.resume()
+
+        
+        
         // Do any additional setup after loading the view, typically from a nib.
 
         
