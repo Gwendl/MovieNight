@@ -34,9 +34,9 @@ class MovieNightAPI {
         self.secretKey = secretKey
     }
     
-    func request(let method: String, let params: [String: String]) -> Bool {
+    func request(let method: String, let params: [String: String], callBack: (NSArray) -> Void, key: String) {
         
-        var queryURL = APIURL + "/" + method + "?"
+        /*var queryURL = APIURL + "/" + method + "?"
         
         let date = NSDate()
         let calendar = NSCalendar.currentCalendar()
@@ -54,12 +54,23 @@ class MovieNightAPI {
             isFirstValue = false
         }
         query += "&sed=" + today
-        query += "&sig=" + "M5tAaiKA%2FwSYn2ERzDVeai2uZcA%3D"
+        query += "&sig=" + "M5tAaiKA%2FwSYn2ERzDVeai2uZcA%3D" */
+
         
-        Alamofire.request(.GET, queryURL + query)
-            .responseJSON { response in
-                debugPrint(response)
+        Alamofire.request(.POST, "http://api.allocine.fr/rest/v3/movielist?partner=100043982026&filter=nowshowing&format=json&sed=20160506&sig=SjM3tUzWnBT2p9VL9avyuRldSec%3D",  encoding:.JSON).responseJSON
+            { response in switch response.result {
+            case .Success(let JSON):
+                let data = JSON as! NSDictionary
+                let feed = data.valueForKey("feed") as! NSDictionary
+                callBack(feed.valueForKey(key) as! NSArray)
+                
+            case .Failure(let error):
+                print("Request failed with error: \(error)")
+                }
         }
-        return true
+    }
+    
+    func getMovies(callBack: (NSArray) -> Void) {
+        self.request("movielist", params: [String: String](), callBack: callBack, key: "movie")
     }
 }
