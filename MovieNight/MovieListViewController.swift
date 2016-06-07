@@ -32,7 +32,9 @@ class MovieListTableViewController : UITableViewController {
     
     var i = 0
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var name = "movieCell\(i++)"
+        
+        let name = "movieCell\(i)"
+        i += 1
         let cell = tableView.dequeueReusableCellWithIdentifier(name, forIndexPath: indexPath)
         
         return cell
