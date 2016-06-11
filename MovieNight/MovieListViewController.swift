@@ -11,15 +11,16 @@ import UIKit
 
 class MovieListTableViewController : UITableViewController {
     
+    var movies: NSArray = []
+    
     override func viewDidLoad() {
         let api = MovieNightAPI(partnerKey: "100043982026", secretKey: "29d185d98c984a359e6e6f26a0474269")
         api.getMovies(test)
     }
     
     func test(data: NSArray) {
-        for x in data {
-            print(x)
-        }
+        movies = data
+        tableView.reloadData()
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -27,14 +28,12 @@ class MovieListTableViewController : UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return movies.count
     }
     
-    var i = 0
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let name = "movieCell\(i)"
-        i += 1
+        let name = "movieCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(name, forIndexPath: indexPath)
         
         return cell
