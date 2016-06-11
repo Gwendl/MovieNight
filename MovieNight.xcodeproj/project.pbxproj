@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		03D39E631118A5E1AD4DD750 /* Pods_MovieNight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6351E4C208AC2B3FEDCE29D6 /* Pods_MovieNight.framework */; };
+		20C1882A1D0BFF940001C3A2 /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C188291D0BFF940001C3A2 /* MovieTableViewCell.swift */; };
 		93929D541CCFEE9100B23EC4 /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93929D531CCFEE9100B23EC4 /* MovieListViewController.swift */; };
 		A03F40611CCFC20E0020201E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03F40601CCFC20E0020201E /* AppDelegate.swift */; };
 		A03F40631CCFC20E0020201E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03F40621CCFC20E0020201E /* ViewController.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		20C188291D0BFF940001C3A2 /* MovieTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 		5098B474B140BFB89A8578E2 /* Pods-MovieNight.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieNight.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MovieNight/Pods-MovieNight.debug.xcconfig"; sourceTree = "<group>"; };
 		6351E4C208AC2B3FEDCE29D6 /* Pods_MovieNight.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieNight.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CD8E06C14CB03886B3FA8A3 /* Pods-MovieNight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieNight.release.xcconfig"; path = "Pods/Target Support Files/Pods-MovieNight/Pods-MovieNight.release.xcconfig"; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				A03F40621CCFC20E0020201E /* ViewController.swift */,
 				A05CDCD41CD15A3B00258960 /* MovieNightAPI.swift */,
 				93929D531CCFEE9100B23EC4 /* MovieListViewController.swift */,
+				20C188291D0BFF940001C3A2 /* MovieTableViewCell.swift */,
 				A03F40641CCFC20E0020201E /* Main.storyboard */,
 				A03F40671CCFC20E0020201E /* Assets.xcassets */,
 				A03F40691CCFC20E0020201E /* LaunchScreen.storyboard */,
@@ -217,6 +220,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20C1882A1D0BFF940001C3A2 /* MovieTableViewCell.swift in Sources */,
 				93929D541CCFEE9100B23EC4 /* MovieListViewController.swift in Sources */,
 				A03F40631CCFC20E0020201E /* ViewController.swift in Sources */,
 				A05CDCD51CD15A3B00258960 /* MovieNightAPI.swift in Sources */,
