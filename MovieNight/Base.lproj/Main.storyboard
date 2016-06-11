@@ -163,10 +163,10 @@
             </objects>
             <point key="canvasLocation" x="272" y="9"/>
         </scene>
-        <!--Split View Controller-->
+        <!--Main Split View-->
         <scene sceneID="OiT-Rl-4XX">
             <objects>
-                <splitViewController id="s4p-Sn-XOT" sceneMemberID="viewController">
+                <splitViewController id="s4p-Sn-XOT" customClass="MainSplitView" customModule="MovieNight" customModuleProvider="target" sceneMemberID="viewController">
                     <connections>
                         <segue destination="Rdu-Vg-tgM" kind="relationship" relationship="masterViewController" id="WIQ-bJ-Uyg"/>
                         <segue destination="8Ab-qq-8i3" kind="relationship" relationship="detailViewController" id="Hh0-1j-K8Z"/>
