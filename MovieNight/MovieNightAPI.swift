@@ -24,7 +24,6 @@ extension String {
 
 class MovieNightAPI {
     let APIURL = "http://api.allocine.fr/rest/v3"
-    let userAgent = "Dalvik/1.6.0 (Linux; U; Android 4.2.2; Nexus 4 Build/JDQ39E)"
     var partnerKey: String
     var secretKey: String
     
@@ -36,7 +35,7 @@ class MovieNightAPI {
     
     func request(let method: String, let params: [String: String], callBack: (NSArray) -> Void, key: String) {
         
-        /*var queryURL = APIURL + "/" + method + "?"
+        var queryURL = APIURL + "/" + method + "?"
         
         let date = NSDate()
         let calendar = NSCalendar.currentCalendar()
@@ -54,10 +53,14 @@ class MovieNightAPI {
             isFirstValue = false
         }
         query += "&sed=" + today
-        query += "&sig=" + "M5tAaiKA%2FwSYn2ERzDVeai2uZcA%3D" */
+        let data = (self.secretKey + query).dataUsingEncoding(NSUTF8StringEncoding)!
+        let hash = data.sha1()!
+        let base64Decoded = hash.base64EncodedDataWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
+        let finalString = NSString(data: base64Decoded, encoding: NSUTF8StringEncoding)
+        query += "&sig=" + (finalString as! String)
 
         
-        Alamofire.request(.POST, "http://api.allocine.fr/rest/v3/movielist?partner=100043982026&filter=nowshowing&format=json&sed=20160506&sig=SjM3tUzWnBT2p9VL9avyuRldSec%3D",  encoding:.JSON).responseJSON
+        Alamofire.request(.POST, queryURL + query,  encoding:.JSON).responseJSON
             { response in switch response.result {
             case .Success(let JSON):
                 let data = JSON as! NSDictionary
@@ -71,6 +74,6 @@ class MovieNightAPI {
     }
     
     func getMovies(callBack: (NSArray) -> Void) {
-        self.request("movielist", params: [String: String](), callBack: callBack, key: "movie")
+        self.request("movielist", params: ["partner": self.partnerKey, "filter": "nowshowing", "format": "json"], callBack: callBack, key: "movie")
     }
 }
