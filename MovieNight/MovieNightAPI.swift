@@ -35,7 +35,7 @@ class MovieNightAPI {
     
     func request(let method: String, let params: [String: String], callBack: (NSArray) -> Void, key: String) {
         
-        var queryURL = APIURL + "/" + method + "?"
+        let queryURL = APIURL + "/" + method + "?"
         
         let date = NSDate()
         let calendar = NSCalendar.currentCalendar()

@@ -130,7 +130,6 @@
                                         <constraint firstAttribute="trailingMargin" secondItem="q8e-3W-dbX" secondAttribute="trailing" id="dXY-PC-Ja3"/>
                                         <constraint firstItem="aix-au-uZT" firstAttribute="leading" secondItem="12R-Nu-7lA" secondAttribute="leadingMargin" constant="6" id="e98-wQ-bbc"/>
                                         <constraint firstItem="q8e-3W-dbX" firstAttribute="leading" secondItem="aix-au-uZT" secondAttribute="trailing" constant="16" id="i7w-ud-pCo"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="OkI-7d-ECb" secondAttribute="bottom" id="wow-BD-UEn"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
