@@ -11,7 +11,7 @@ import UIKit
 class MovieTableViewCell: UITableViewCell {
 
     @IBOutlet weak var movieName: UILabel!
-    @IBOutlet weak var movieDuration: UILabel!
+    @IBOutlet weak var movieTheaterCount: UILabel!
     @IBOutlet weak var moviePoster: UIImageView!
     
     

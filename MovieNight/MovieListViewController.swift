@@ -48,6 +48,9 @@ class MovieListTableViewController : UITableViewController {
         let poster = movieData["poster"] as! NSDictionary
         let posterLink = poster["href"] as! String
         
+        let theaterCount = (movieData["statistics"] as! NSDictionary)["theaterCount"]!
+        cell.movieTheaterCount.text = "\(theaterCount) salles"
+        
         cell.moviePoster.image = nil
         
         let imageView = cell.moviePoster
