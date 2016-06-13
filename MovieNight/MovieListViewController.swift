@@ -22,7 +22,6 @@ class MovieListTableViewController : UITableViewController {
     func populateTableView(data: NSArray) {
         
         movies = data
-        print(movies)
         posters = [UIImage?](count: movies.count, repeatedValue: nil)
         tableView.reloadData()
     }
@@ -37,19 +36,24 @@ class MovieListTableViewController : UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
+        
         let name = "movieCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(name, forIndexPath: indexPath) as! MovieTableViewCell
         
         let movieData = movies[indexPath.row]
+        let statistics = movieData["statistics"] as! NSDictionary
         
+        // set title
         let title = movieData["title"] as! String
         cell.movieName.text = title
         
+        // set theaterCount
+        let theaterCount = statistics["theaterCount"]!
+        cell.movieTheaterCount.text = "\(theaterCount) salles"
+        
+        // set poster
         let poster = movieData["poster"] as! NSDictionary
         let posterLink = poster["href"] as! String
-        
-        let theaterCount = (movieData["statistics"] as! NSDictionary)["theaterCount"]!
-        cell.movieTheaterCount.text = "\(theaterCount) salles"
         
         cell.moviePoster.image = nil
         
@@ -89,6 +93,10 @@ class MovieListTableViewController : UITableViewController {
             }
             
         }
+        
+        // set rating
+        let rating = statistics["userRating"] as! Float
+        cell.setRating(rating)
         
         return cell
     }
