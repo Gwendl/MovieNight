@@ -14,6 +14,7 @@ class MovieTableViewCell: UITableViewCell {
     @IBOutlet weak var movieTheaterCount: UILabel!
     @IBOutlet weak var moviePoster: UIImageView!
     
+    @IBOutlet weak var ratingView: UIView!
     @IBOutlet weak var star1: UIImageView!
     @IBOutlet weak var star2: UIImageView!
     @IBOutlet weak var star3: UIImageView!

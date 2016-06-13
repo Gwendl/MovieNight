@@ -74,6 +74,6 @@ class MovieNightAPI {
     }
     
     func getMovies(callBack: (NSArray) -> Void) {
-        self.request("movielist", params: ["partner": self.partnerKey, "filter": "nowshowing", "format": "json"], callBack: callBack, key: "movie")
+        self.request("movielist", params: ["count": "50", "partner": self.partnerKey, "filter": "nowshowing", "format": "json"], callBack: callBack, key: "movie")
     }
 }

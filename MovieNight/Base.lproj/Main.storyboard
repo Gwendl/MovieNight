@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="8Ab-qq-8i3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="s4p-Sn-XOT">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -25,7 +25,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="YEf-XP-KGG">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="549"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="maxresdefault" translatesAutoresizingMaskIntoConstraints="NO" id="PHn-PU-sEL">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="maxresdefault" translatesAutoresizingMaskIntoConstraints="NO" id="PHn-PU-sEL">
                                                 <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="200" id="Jfk-Jv-ghC"/>
@@ -186,6 +186,7 @@
                                     <outlet property="movieName" destination="EMl-qF-Sin" id="4og-ml-ZSB"/>
                                     <outlet property="moviePoster" destination="aix-au-uZT" id="Bf4-IN-n5L"/>
                                     <outlet property="movieTheaterCount" destination="q8e-3W-dbX" id="gZI-0K-zJc"/>
+                                    <outlet property="ratingView" destination="OkI-7d-ECb" id="bTt-Or-em5"/>
                                     <outlet property="star1" destination="WXs-yZ-qbW" id="0ig-PE-1T7"/>
                                     <outlet property="star2" destination="cvi-Gr-aWh" id="9ns-bp-BVc"/>
                                     <outlet property="star3" destination="EcM-OS-h5C" id="wfp-tl-IWV"/>

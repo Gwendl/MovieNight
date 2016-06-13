@@ -19,10 +19,39 @@ class MovieListTableViewController : UITableViewController {
         api.getMovies(populateTableView)
     }
     
+    func sortMovies() {
+        movies = movies.sort({(this, that) in
+            let this = this as! NSDictionary
+            let that = that as! NSDictionary
+            
+            let statsA = this["statistics"]
+            let statsB = that["statistics"]
+            
+            if (statsA == nil) {
+                return true
+            } else if (statsB == nil) {
+                return false
+            }
+            
+            let gradeA = statsA!["userRating"] as? Float
+            let gradeB = statsB!["userRating"] as? Float
+            
+            if (gradeA == nil) {
+                return false
+            } else if (gradeB == nil) {
+                return true
+            }
+            
+            return gradeA > gradeB
+        
+        })
+    }
+    
     func populateTableView(data: NSArray) {
         
         movies = data
         posters = [UIImage?](count: movies.count, repeatedValue: nil)
+        sortMovies()
         tableView.reloadData()
     }
     
@@ -52,55 +81,58 @@ class MovieListTableViewController : UITableViewController {
         cell.movieTheaterCount.text = "\(theaterCount) salles"
         
         // set poster
-        let poster = movieData["poster"] as! NSDictionary
-        let posterLink = poster["href"] as! String
+        if let poster = movieData["poster"] as? NSDictionary {
         
-        cell.moviePoster.image = nil
-        
-        let imageView = cell.moviePoster
-        
-        func setImage() {
+            let posterLink = poster["href"] as! String
             
-            UIView.transitionWithView(imageView,
-                                      duration:1,
-                                      options: UIViewAnimationOptions.TransitionCrossDissolve,
-                                      animations: { imageView.image = self.posters![indexPath.row] },
-                                      completion: nil)
-        }
-        
-        if let poster = posters![indexPath.row] {
+            cell.moviePoster.image = nil
             
-            cell.moviePoster.image = poster
+            let imageView = cell.moviePoster
             
-        } else {
-            
-            if let url = NSURL(string: posterLink) {
-                let request = NSURLRequest(URL: url)
-                let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-                let session = NSURLSession(configuration: config)
+            func setImage() {
                 
-                let task = session.dataTaskWithRequest(request, completionHandler: {(data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
-                    
-                    if let imageData = data as NSData? {
-                        dispatch_async(dispatch_get_main_queue(), {() -> Void in
-                            self.posters![indexPath.row] = UIImage(data: imageData)
-                            setImage()
-                        })
-                    }
-                })
-                
-                task.resume()
+                UIView.transitionWithView(imageView,
+                                          duration:1,
+                                          options: UIViewAnimationOptions.TransitionCrossDissolve,
+                                          animations: { imageView.image = self.posters![indexPath.row] },
+                                          completion: nil)
             }
             
+            if let poster = posters![indexPath.row] {
+                
+                cell.moviePoster.image = poster
+                
+            } else {
+                
+                if let url = NSURL(string: posterLink) {
+                    let request = NSURLRequest(URL: url)
+                    let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+                    let session = NSURLSession(configuration: config)
+                    
+                    let task = session.dataTaskWithRequest(request, completionHandler: {(data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+                        
+                        if let imageData = data as NSData? {
+                            dispatch_async(dispatch_get_main_queue(), {() -> Void in
+                                self.posters![indexPath.row] = UIImage(data: imageData)
+                                setImage()
+                            })
+                        }
+                    })
+                    
+                    task.resume()
+                }
+                
+            }
         }
         
         // set rating
-        let rating = statistics["userRating"] as! Float
-        cell.setRating(rating)
+        if let rating = statistics["userRating"] as? Float {
+            cell.setRating(rating)
+            cell.ratingView.hidden = false
+        } else {
+            cell.ratingView.hidden = true
+        }
         
         return cell
     }
-    
-    
-    
 }
