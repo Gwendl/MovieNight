@@ -48,7 +48,7 @@ class MovieListTableViewController : UITableViewController {
     }
     
     func populateTableView(data: NSArray) {
-        
+        print(data)
         movies = data
         posters = [UIImage?](count: movies.count, repeatedValue: nil)
         sortMovies()
