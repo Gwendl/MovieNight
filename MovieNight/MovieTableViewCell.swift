@@ -50,8 +50,6 @@ class MovieTableViewCell: UITableViewCell {
         setStar(star3, id: 2)
         setStar(star4, id: 3)
         setStar(star5, id: 4)
-        
-        print(grade)
     }
 
 }
