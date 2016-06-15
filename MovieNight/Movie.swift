@@ -17,9 +17,9 @@ class Movie {
     private var thumbNail: UIImage?
     
     let name: String
-    let rate: Float?
+    let rate: Float
     
-    init(name: String, rate: Float?, posterURL: NSURL, thumbNailURL: NSURL)
+    init(name: String, rate: Float, posterURL: NSURL, thumbNailURL: NSURL)
     {
         self.name = name
         self.rate = rate

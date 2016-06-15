@@ -26,7 +26,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="513"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="maxresdefault" translatesAutoresizingMaskIntoConstraints="NO" id="PHn-PU-sEL">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="600" height="210"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="210" id="Jfk-Jv-ghC"/>
                                                 </constraints>
@@ -237,9 +237,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="maxresdefault" width="1280" height="720"/>
         <image name="star0" width="204" height="194"/>
         <image name="star05" width="204" height="194"/>
         <image name="star1" width="204" height="194"/>
-        <image name="thumbnail" width="960" height="540"/>
     </resources>
 </document>
