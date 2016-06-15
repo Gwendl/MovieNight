@@ -85,6 +85,8 @@ class MovieNightAPI {
             
             let statistics = m.valueForKey("statistics") as! NSDictionary?
             let userRating = statistics?.valueForKey("userRating") as! Float?
+            let salles = statistics?["theaterCount"] as! Int?
+            
             
             let poster = m.valueForKey("poster") as! NSDictionary?
             let posterURLString = poster?.valueForKey("href") as! String?
@@ -106,8 +108,8 @@ class MovieNightAPI {
             print(title)
             print(userRating)
             
-            if (thumbNailURL != nil && posterURL != nil && title != nil && userRating != nil) {
-                movieList.append(Movie(name: title!, rate: userRating!, posterURL: posterURL!, thumbNailURL: thumbNailURL!))
+            if (thumbNailURL != nil && posterURL != nil && title != nil && userRating != nil && salles != nil) {
+                movieList.append(Movie(name: title!, rate: userRating!, salle: salles!, posterURL: posterURL!, thumbNailURL: thumbNailURL!))
             }
         }
         return movieList

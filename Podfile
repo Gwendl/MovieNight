@@ -5,7 +5,7 @@
 
 target 'MovieNight' do
 
-pod 'Alamofire', '~> 3.3'
+pod 'Alamofire', '~> 3.4'
 pod 'CryptoSwift'
 
 end

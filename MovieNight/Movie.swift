@@ -18,11 +18,13 @@ class Movie {
     
     let name: String
     let rate: Float
+    let salle: Int
     
-    init(name: String, rate: Float, posterURL: NSURL, thumbNailURL: NSURL)
+    init(name: String, rate: Float, salle: Int, posterURL: NSURL, thumbNailURL: NSURL)
     {
         self.name = name
         self.rate = rate
+        self.salle = salle
         self.posterURL = posterURL
         self.thumbNailURL = thumbNailURL
     }
@@ -34,25 +36,41 @@ class Movie {
     }
     
     
-    private func imageThroughCallBack(inout image: UIImage?, callBack: (UIImage)->()) {
-        if image == nil {
+    private func imageThroughCallBack(isPoster: Bool, callBack: (UIImage, Bool)->()) {
+        
+        let testimage: UIImage?
+        
+        if isPoster {
+            testimage = poster
+        } else {
+            testimage = thumbNail
+        }
+        
+        if let img = testimage {
+            callBack(img, false)
+        } else {
             getDataFromUrl(posterURL) { (data, response, error)  in
-                dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                    guard let data = data where error == nil else { return }
-                    image = UIImage(data: data)
-                    callBack(image!)
+                if let data = data {
+                    let image = UIImage(data: data)
+
+                    if isPoster {
+                        self.poster = image
+                    } else {
+                        self.thumbNail = image
+                    }
+                    dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                        callBack(image!, true)
+                    }
                 }
             }
-        } else {
-            callBack(image!)
         }
     }
     
-    func usePoster(callBack: (UIImage)->()) {
-        imageThroughCallBack(&poster, callBack: callBack)
+    func usePoster(callBack: (UIImage, Bool)->()) {
+        imageThroughCallBack(true, callBack: callBack)
     }
     
-    func usethumbNail(callBack: (UIImage)->()) {
-        imageThroughCallBack(&poster, callBack: callBack)
+    func usethumbNail(callBack: (UIImage, Bool)->()) {
+        imageThroughCallBack(false, callBack: callBack)
     }
 }
