@@ -11,8 +11,7 @@ import UIKit
 
 class MovieListTableViewController : UITableViewController {
     
-    var movies: NSArray = []
-    var posters: [UIImage?]?
+    var movies: [Movie] = []
     
     override func viewDidLoad() {
         let api = MovieNightAPI(partnerKey: "100043982026", secretKey: "29d185d98c984a359e6e6f26a0474269")
@@ -21,36 +20,12 @@ class MovieListTableViewController : UITableViewController {
     
     func sortMovies() {
         movies = movies.sort({(this, that) in
-            let this = this as! NSDictionary
-            let that = that as! NSDictionary
-            
-            let statsA = this["statistics"]
-            let statsB = that["statistics"]
-            
-            if (statsA == nil) {
-                return true
-            } else if (statsB == nil) {
-                return false
-            }
-            
-            let gradeA = statsA!["userRating"] as? Float
-            let gradeB = statsB!["userRating"] as? Float
-            
-            if (gradeA == nil) {
-                return false
-            } else if (gradeB == nil) {
-                return true
-            }
-            
-            return gradeA > gradeB
-        
+            return this.rate > that.rate
         })
     }
     
-    func populateTableView(data: NSArray) {
-        print(data)
+    func populateTableView(data: [Movie]) {
         movies = data
-        posters = [UIImage?](count: movies.count, repeatedValue: nil)
         sortMovies()
         tableView.reloadData()
     }
@@ -69,69 +44,29 @@ class MovieListTableViewController : UITableViewController {
         let name = "movieCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(name, forIndexPath: indexPath) as! MovieTableViewCell
         
-        let movieData = movies[indexPath.row]
-        let statistics = movieData["statistics"] as! NSDictionary
-        
-        // set title
-        let title = movieData["title"] as! String
-        cell.movieName.text = title
+        let movie = movies[indexPath.row]
+        cell.movieName.text = movie.name
         
         // set theaterCount
-        let theaterCount = statistics["theaterCount"]!
-        cell.movieTheaterCount.text = "\(theaterCount) salles"
+        cell.movieTheaterCount.text = "\(movie.salle) salles"
         
-        // set poster
-        if let poster = movieData["poster"] as? NSDictionary {
-        
-            let posterLink = poster["href"] as! String
+        func setImage(image: UIImage, loaded: Bool) {
             
-            cell.moviePoster.image = nil
-            
-            let imageView = cell.moviePoster
-            
-            func setImage() {
-                
-                UIView.transitionWithView(imageView,
-                                          duration:1,
-                                          options: UIViewAnimationOptions.TransitionCrossDissolve,
-                                          animations: { imageView.image = self.posters![indexPath.row] },
-                                          completion: nil)
-            }
-            
-            if let poster = posters![indexPath.row] {
-                
-                cell.moviePoster.image = poster
-                
+            if (loaded) {
+            UIView.transitionWithView(cell.moviePoster,
+                                      duration: 1,
+                                      options: UIViewAnimationOptions.TransitionCrossDissolve,
+                                      animations: { cell.moviePoster.image = image },
+                                      completion: nil)
             } else {
-                
-                if let url = NSURL(string: posterLink) {
-                    let request = NSURLRequest(URL: url)
-                    let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-                    let session = NSURLSession(configuration: config)
-                    
-                    let task = session.dataTaskWithRequest(request, completionHandler: {(data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
-                        
-                        if let imageData = data as NSData? {
-                            dispatch_async(dispatch_get_main_queue(), {() -> Void in
-                                self.posters![indexPath.row] = UIImage(data: imageData)
-                                setImage()
-                            })
-                        }
-                    })
-                    
-                    task.resume()
-                }
-                
+                cell.moviePoster.image = image
             }
         }
         
-        // set rating
-        if let rating = statistics["userRating"] as? Float {
-            cell.setRating(rating)
-            cell.ratingView.hidden = false
-        } else {
-            cell.ratingView.hidden = true
-        }
+        cell.moviePoster.image = nil
+        movie.usePoster(setImage)
+        
+        cell.setRating(movie.rate)
         
         return cell
     }
