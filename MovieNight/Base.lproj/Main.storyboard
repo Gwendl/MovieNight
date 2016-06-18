@@ -7,10 +7,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Detail View Controler-->
+        <!--Detail View Controller-->
         <scene sceneID="iPk-hk-amo">
             <objects>
-                <viewController id="8Ab-qq-8i3" customClass="detailViewControler" customModule="MovieNight" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8Ab-qq-8i3" customClass="DetailViewController" customModule="MovieNight" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="g5o-e8-8Zd"/>
                         <viewControllerLayoutGuide type="bottom" id="jCu-jr-OYC"/>
@@ -66,13 +66,14 @@
                             <constraint firstItem="ygh-QJ-YvI" firstAttribute="trailing" secondItem="AFo-Pg-6uj" secondAttribute="trailing" id="hSM-yM-Lz2"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="RbY-k2-ryF"/>
                     <connections>
                         <outlet property="movieImage" destination="PHn-PU-sEL" id="snG-cP-Muy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yKO-mI-QLz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="272" y="690"/>
+            <point key="canvasLocation" x="1133" y="854"/>
         </scene>
         <!--Meilleurs films à l'affiche-->
         <scene sceneID="WZM-Gg-wKO">
@@ -192,6 +193,7 @@
                                     <outlet property="star3" destination="EcM-OS-h5C" id="wfp-tl-IWV"/>
                                     <outlet property="star4" destination="IdV-op-iNy" id="urB-X9-9eb"/>
                                     <outlet property="star5" destination="eVX-mG-EDm" id="vLq-Sc-qMV"/>
+                                    <segue destination="uQU-w8-ccl" kind="showDetail" identifier="showDetail" id="G47-zU-eec"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -228,12 +230,30 @@
                 <splitViewController id="s4p-Sn-XOT" customClass="MainSplitView" customModule="MovieNight" customModuleProvider="target" sceneMemberID="viewController">
                     <connections>
                         <segue destination="Rdu-Vg-tgM" kind="relationship" relationship="masterViewController" id="WIQ-bJ-Uyg"/>
-                        <segue destination="8Ab-qq-8i3" kind="relationship" relationship="detailViewController" id="Hh0-1j-K8Z"/>
+                        <segue destination="uQU-w8-ccl" kind="relationship" relationship="detailViewController" id="Hh0-1j-K8Z"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pCT-ke-aoI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-548" y="340"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="XMM-Gj-akD">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uQU-w8-ccl" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="s8P-f4-2Kr">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8Ab-qq-8i3" kind="relationship" relationship="rootViewController" id="GnA-nu-xCF"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I2y-Do-2K0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="335" y="840"/>
         </scene>
     </scenes>
     <resources>
@@ -242,4 +262,7 @@
         <image name="star05" width="204" height="194"/>
         <image name="star1" width="204" height="194"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="G47-zU-eec"/>
+    </inferredMetricsTieBreakers>
 </document>

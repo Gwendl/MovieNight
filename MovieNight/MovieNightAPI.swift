@@ -111,10 +111,6 @@ class MovieNightAPI {
             if thumbNailURLString != nil {
                 thumbNailURL = NSURL(string: thumbNailURLString!)
             }
-            print(thumbNailURL)
-            print(posterURL)
-            print(title)
-            print(userRating)
             
             if (thumbNailURL != nil && posterURL != nil && title != nil && userRating != nil && salles != nil) {
                 movieList.append(Movie(name: title!, rate: userRating!, salle: salles!, posterURL: posterURL!, thumbNailURL: thumbNailURL!))

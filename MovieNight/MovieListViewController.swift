@@ -9,14 +9,47 @@
 import Foundation
 import UIKit
 
+protocol MovieListDelegate: class {
+    func movieSelected(movie: Movie)
+}
+
 class MovieListTableViewController : UITableViewController {
     
+    var detailViewController: DetailViewController? = nil
     var movies: [Movie] = []
+    weak var delegate: MovieListDelegate?
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         let api = MovieNightAPI(partnerKey: "100043982026", secretKey: "29d185d98c984a359e6e6f26a0474269")
-        //api.getMovies(populateTableView)
-        api.getMoviesAround()
+        
+        api.getMovies(populateTableView)
+        
+        if let split = self.splitViewController {
+            let controllers = split.viewControllers
+            self.detailViewController = (controllers[controllers.count - 1] as! UINavigationController).topViewController as? DetailViewController
+        }
+        
+        if UIApplication.sharedApplication().statusBarOrientation.isPortrait {
+            self.splitViewController?.preferredDisplayMode = .PrimaryOverlay
+        } else {
+            self.splitViewController?.preferredDisplayMode = .Automatic
+        }
+        
+    }
+    
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        if UIApplication.sharedApplication().statusBarOrientation.isPortrait {
+            self.splitViewController?.preferredDisplayMode = .Automatic
+        } else {
+            self.splitViewController?.preferredDisplayMode = .PrimaryOverlay
+        }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.clearsSelectionOnViewWillAppear = self.splitViewController!.collapsed
+        super.viewWillAppear(animated)
     }
     
     func sortMovies() {
@@ -71,4 +104,26 @@ class MovieListTableViewController : UITableViewController {
         
         return cell
     }
+    
+    /*
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        
+        if let detailViewControler = self.delegate as? DetailViewController {
+            splitViewController?.showDetailViewController(detailViewControler.navigationController!, sender: nil)
+        }
+    }
+ */
+ 
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showDetail" {
+            if let indexPath = self.tableView.indexPathForSelectedRow {
+                let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
+                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
+                controller.navigationItem.leftItemsSupplementBackButton = true
+            }
+        }
+    }
+    
+    
 }

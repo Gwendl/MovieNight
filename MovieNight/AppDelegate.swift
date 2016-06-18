@@ -9,7 +9,7 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
 
     var window: UIWindow?
 
@@ -19,6 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().barTintColor = MainSplitView.appColor
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        
+        let splitViewController = self.window!.rootViewController as! UISplitViewController
+        let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count - 1] as! UINavigationController
+        navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
+        splitViewController.delegate = self
         return true
     }
 
@@ -44,6 +49,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController: UIViewController, ontoPrimaryViewController primaryViewController: UIViewController) -> Bool {
+        guard let secondaryAsNavController = secondaryViewController as? UINavigationController else { return false }
+        guard let topAsDetailcontroller = secondaryAsNavController.topViewController as? DetailViewController else { return false }
+        if topAsDetailcontroller.detailItem == nil {
+            return true // collapse handled
+        }
+        return false
+    }
 
 }
-
