@@ -15,7 +15,8 @@ class MovieListTableViewController : UITableViewController {
     
     override func viewDidLoad() {
         let api = MovieNightAPI(partnerKey: "100043982026", secretKey: "29d185d98c984a359e6e6f26a0474269")
-        api.getMovies(populateTableView)
+        //api.getMovies(populateTableView)
+        api.getMoviesAround()
     }
     
     func sortMovies() {

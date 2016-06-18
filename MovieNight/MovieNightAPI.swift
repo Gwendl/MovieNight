@@ -56,11 +56,13 @@ class MovieNightAPI {
         let finalString = NSString(data: base64Decoded, encoding: NSUTF8StringEncoding)
         query += "&sig=" + (finalString as! String)
         
+        print(queryURL + query)
         
         Alamofire.request(.POST, queryURL + query,  encoding:.JSON).responseJSON
             { response in switch response.result {
             case .Success(let JSON):
                 let data = JSON as! NSDictionary
+              //  print(data)
                 let feed = data.valueForKey("feed") as! NSDictionary
                 let movieList = self.movieList(feed.valueForKey(key) as! NSArray)
                 callBack(movieList)
@@ -73,6 +75,12 @@ class MovieNightAPI {
     
     func getMovies(callBack: ([Movie]) -> Void) {
         self.request("movielist", params: ["count": "50", "partner": self.partnerKey, "filter": "nowshowing", "format": "json"], callBack: callBack, key: "movie")
+    }
+    
+    func getMoviesAround() {
+        self.request("showtimelist", params: ["count": "40", "partner": self.partnerKey, "lat": "45.7573950" , "long": "4.8572230", "radius": "20"], callBack: {(movies: [Movie]) in
+                print(movies)
+        }, key: "movie")
     }
     
     func movieList(infos: NSArray) -> [Movie] {
