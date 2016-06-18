@@ -31,20 +31,8 @@ class MovieListTableViewController : UITableViewController {
             self.detailViewController = (controllers[controllers.count - 1] as! UINavigationController).topViewController as? DetailViewController
         }
         
-        if UIApplication.sharedApplication().statusBarOrientation.isPortrait {
-            self.splitViewController?.preferredDisplayMode = .PrimaryOverlay
-        } else {
-            self.splitViewController?.preferredDisplayMode = .Automatic
-        }
+        self.splitViewController?.preferredDisplayMode = .AllVisible
         
-    }
-    
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        if UIApplication.sharedApplication().statusBarOrientation.isPortrait {
-            self.splitViewController?.preferredDisplayMode = .Automatic
-        } else {
-            self.splitViewController?.preferredDisplayMode = .PrimaryOverlay
-        }
     }
     
     override func viewWillAppear(animated: Bool) {
