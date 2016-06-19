@@ -16,8 +16,8 @@
 		A03F40681CCFC20E0020201E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A03F40671CCFC20E0020201E /* Assets.xcassets */; };
 		A03F406B1CCFC20E0020201E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A03F40691CCFC20E0020201E /* LaunchScreen.storyboard */; };
 		A05CDCD51CD15A3B00258960 /* MovieNightAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05CDCD41CD15A3B00258960 /* MovieNightAPI.swift */; };
+		A06063891D1693C500BA513F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A06063881D1693C500BA513F /* MapKit.framework */; };
 		A0D2C9D91D0EC14900F09139 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D2C9D81D0EC14900F09139 /* DetailViewController.swift */; };
-		A0D58E991D0ED87700A9D3BD /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D58E981D0ED87700A9D3BD /* MapKit.framework */; };
 		A0D58E9B1D0EDFAD00A9D3BD /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D58E9A1D0EDFAD00A9D3BD /* Movie.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,8 +35,8 @@
 		A03F406A1CCFC20E0020201E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A03F406C1CCFC20E0020201E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A05CDCD41CD15A3B00258960 /* MovieNightAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieNightAPI.swift; sourceTree = "<group>"; };
+		A06063881D1693C500BA513F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		A0D2C9D81D0EC14900F09139 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		A0D58E981D0ED87700A9D3BD /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		A0D58E9A1D0EDFAD00A9D3BD /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -45,7 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A0D58E991D0ED87700A9D3BD /* MapKit.framework in Frameworks */,
+				A06063891D1693C500BA513F /* MapKit.framework in Frameworks */,
 				03D39E631118A5E1AD4DD750 /* Pods_MovieNight.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -56,7 +56,7 @@
 		4DDD7D7907435C17B15ED3A5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A0D58E981D0ED87700A9D3BD /* MapKit.framework */,
+				A06063881D1693C500BA513F /* MapKit.framework */,
 				6351E4C208AC2B3FEDCE29D6 /* Pods_MovieNight.framework */,
 			);
 			name = Frameworks;
@@ -143,6 +143,17 @@
 					A03F405C1CCFC20E0020201E = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = KA74PPR2DQ;
+						SystemCapabilities = {
+							com.apple.HomeKit = {
+								enabled = 0;
+							};
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};

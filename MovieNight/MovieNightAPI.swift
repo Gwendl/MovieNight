@@ -30,7 +30,7 @@ class MovieNightAPI {
         self.secretKey = secretKey
     }
     
-    func request(let method: String, let params: [String: String], callBack: [Movie] -> Void, key: String) {
+    func request(let method: String, let params: [String: String], callBack: NSDictionary -> Void) {
         
         let queryURL = APIURL + "/" + method + "?"
         
@@ -64,8 +64,7 @@ class MovieNightAPI {
                 let data = JSON as! NSDictionary
               //  print(data)
                 let feed = data.valueForKey("feed") as! NSDictionary
-                let movieList = self.movieList(feed.valueForKey(key) as! NSArray)
-                callBack(movieList)
+                callBack(feed)
                 
             case .Failure(let error):
                 print("Request failed with error: \(error)")
@@ -73,14 +72,14 @@ class MovieNightAPI {
         }
     }
     
-    func getMovies(callBack: ([Movie]) -> Void) {
-        self.request("movielist", params: ["count": "50", "partner": self.partnerKey, "filter": "nowshowing", "format": "json"], callBack: callBack, key: "movie")
+    func getMovies(callBack: (NSDictionary) -> Void) {
+        self.request("movielist", params: ["count": "30", "partner": partnerKey, "filter": "nowshowing"], callBack: callBack)
     }
     
-    func getMoviesAround() {
-        self.request("showtimelist", params: ["count": "40", "partner": self.partnerKey, "lat": "45.7573950" , "long": "4.8572230", "radius": "20"], callBack: {(movies: [Movie]) in
-                print(movies)
-        }, key: "movie")
+    func getShows(lat: Float, long: Float, code: Int, callBack: (NSDictionary) -> Void) {
+        self.request("showtimelist", params: ["partner": partnerKey, "count": "20",
+            "lat": "\(lat)", "long": "\(long)", "profile": "medium",
+            "radius": "10", "movie": "\(code)"], callBack: callBack)
     }
     
     func movieList(infos: NSArray) -> [Movie] {
@@ -89,6 +88,7 @@ class MovieNightAPI {
         for movie in infos {
             let m = movie as! NSDictionary
             let title = m.valueForKey("title") as! String?
+            let code = m.valueForKey("code") as! Int?
             
             
             let statistics = m.valueForKey("statistics") as! NSDictionary?
@@ -112,8 +112,10 @@ class MovieNightAPI {
                 thumbNailURL = NSURL(string: thumbNailURLString!)
             }
             
-            if (thumbNailURL != nil && posterURL != nil && title != nil && userRating != nil && salles != nil) {
-                movieList.append(Movie(name: title!, rate: userRating!, salle: salles!, posterURL: posterURL!, thumbNailURL: thumbNailURL!))
+            if (thumbNailURL != nil && posterURL != nil && title != nil &&
+                code != nil && userRating != nil && salles != nil) {
+                
+                movieList.append(Movie(name: title!, code: code!, rate: userRating!, posterURL: posterURL!, thumbNailURL: thumbNailURL!))
             }
         }
         return movieList

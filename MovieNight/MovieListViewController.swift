@@ -18,12 +18,13 @@ class MovieListTableViewController : UITableViewController {
     var detailViewController: DetailViewController? = nil
     var movies: [Movie] = []
     weak var delegate: MovieListDelegate?
+    let api = MovieNightAPI(partnerKey: "100043982026", secretKey: "29d185d98c984a359e6e6f26a0474269")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let api = MovieNightAPI(partnerKey: "100043982026", secretKey: "29d185d98c984a359e6e6f26a0474269")
         
+
         api.getMovies(populateTableView)
         
         if let split = self.splitViewController {
@@ -39,6 +40,7 @@ class MovieListTableViewController : UITableViewController {
         self.clearsSelectionOnViewWillAppear = self.splitViewController!.collapsed
         super.viewWillAppear(animated)
     }
+
     
     func sortMovies() {
         movies = movies.sort({(this, that) in
@@ -46,11 +48,13 @@ class MovieListTableViewController : UITableViewController {
         })
     }
     
-    func populateTableView(data: [Movie]) {
-        movies = data
+    func populateTableView(data: NSDictionary) {
+        movies = api.movieList(data["movie"] as! NSArray)
         sortMovies()
         tableView.reloadData()
     }
+    
+
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -61,25 +65,38 @@ class MovieListTableViewController : UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
+
         
         let name = "movieCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(name, forIndexPath: indexPath) as! MovieTableViewCell
         
         let movie = movies[indexPath.row]
+        
+        func showsDidload(data: NSDictionary) {
+            movies[indexPath.row].dataToTheater(data)
+            if cell.movieTheaterCount.text != String(movie.theaters.count) {
+                cell.movieTheaterCount.text = "\(movie.theaters.count) salles"
+                cell.movieTheaterCount.setNeedsDisplay()
+            }
+        }
+        
+        if !movie.theatersIsSet {
+            movie.fillTheater(api, callBack: showsDidload)
+        }
+        
         cell.movieName.text = movie.name
         
         // set theaterCount
-        cell.movieTheaterCount.text = "\(movie.salle) salles"
+        cell.movieTheaterCount.text = "\(movie.theaters.count) salles"
         
         func setImage(image: UIImage, loaded: Bool) {
             
             if (loaded) {
-            UIView.transitionWithView(cell.moviePoster,
-                                      duration: 1,
-                                      options: UIViewAnimationOptions.TransitionCrossDissolve,
-                                      animations: { cell.moviePoster.image = image },
-                                      completion: nil)
+                UIView.transitionWithView(cell.moviePoster,
+                                          duration: 1,
+                                          options: UIViewAnimationOptions.TransitionCrossDissolve,
+                                          animations: { cell.moviePoster.image = image },
+                                          completion: nil)
             } else {
                 cell.moviePoster.image = image
             }

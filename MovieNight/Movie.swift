@@ -10,6 +10,20 @@ import UIKit
 
 class Movie {
     
+    class Theater {
+        let name: String
+        let lat: Float
+        let long: Float
+        let postalCode: Int
+        
+        init (name: String, postalCode: Int, lat: Float, long: Float) {
+            self.name = name
+            self.postalCode = postalCode
+            self.lat = lat
+            self.long = long
+        }
+    }
+    
     let posterURL: NSURL
     let thumbNailURL: NSURL
     
@@ -17,16 +31,18 @@ class Movie {
     private var thumbNail: UIImage?
     
     let name: String
+    let code: Int
     let rate: Float
-    let salle: Int
+    var theaters: [Theater] = []
+    var theatersIsSet = false
     
-    init(name: String, rate: Float, salle: Int, posterURL: NSURL, thumbNailURL: NSURL)
+    init(name: String, code: Int, rate: Float, posterURL: NSURL, thumbNailURL: NSURL)
     {
         self.name = name
         self.rate = rate
-        self.salle = salle
         self.posterURL = posterURL
         self.thumbNailURL = thumbNailURL
+        self.code = code
     }
     
     private func getDataFromUrl(url:NSURL, completion: ((data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void)) {
@@ -72,5 +88,28 @@ class Movie {
     
     func usethumbNail(callBack: (UIImage, Bool)->()) {
         imageThroughCallBack(false, callBack: callBack)
+    }
+    
+    func dataToTheater(data: NSDictionary) {
+        let theaterList = data["theaterShowtimes"] as! NSArray
+        for item in theaterList {
+            let place = (item as! NSDictionary)["place"] as! NSDictionary?
+            let theater = place?["theater"] as! NSDictionary?
+            
+            print(theater)
+            let name = theater?["name"] as! String?
+            let postalCode = (theater?["postalCode"] as! String?)
+            let lat = (theater?["geoloc"] as! NSDictionary?)?["lat"] as! Float?
+            let long = (theater?["geoloc"] as! NSDictionary?)?["long"] as! Float?
+            
+            if (name != nil && postalCode != nil && lat != nil && long != nil) {
+                theaters.append(Theater(name: name!, postalCode: Int(postalCode!)!, lat: lat!, long: long!))
+            }
+        }
+        theatersIsSet = true
+    }
+    
+    func fillTheater(api: MovieNightAPI, callBack: (NSDictionary) -> Void) {
+        api.getShows(45.7573950, long: 4.8572230, code: code, callBack: callBack)
     }
 }
