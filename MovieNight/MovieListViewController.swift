@@ -8,24 +8,24 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
 protocol MovieListDelegate: class {
     func movieSelected(movie: Movie)
 }
 
-class MovieListTableViewController : UITableViewController {
+class MovieListTableViewController : UITableViewController, CLLocationManagerDelegate {
     
     var detailViewController: DetailViewController? = nil
+    let locationManager = CLLocationManager()
+    static var locValue: CLLocationCoordinate2D?
     var movies: [Movie] = []
     weak var delegate: MovieListDelegate?
     let api = MovieNightAPI(partnerKey: "100043982026", secretKey: "29d185d98c984a359e6e6f26a0474269")
+    var calledApi = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-
-        api.getMovies(populateTableView)
         
         if let split = self.splitViewController {
             let controllers = split.viewControllers
@@ -34,6 +34,28 @@ class MovieListTableViewController : UITableViewController {
         
         self.splitViewController?.preferredDisplayMode = .AllVisible
         
+        getLocation()
+    }
+    
+    func getLocation() {
+        
+        self.locationManager.delegate = self
+        self.locationManager.requestAlwaysAuthorization()
+        self.locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
+    }
+    
+    @objc func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        MovieListTableViewController.locValue = manager.location?.coordinate
+        if !calledApi {
+            api.getMovies(populateTableView)
+            calledApi = true
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -72,11 +94,16 @@ class MovieListTableViewController : UITableViewController {
         
         let movie = movies[indexPath.row]
         
-        func showsDidload(data: NSDictionary) {
-            movies[indexPath.row].dataToTheater(data)
-            if cell.movieTheaterCount.text != String(movie.theaters.count) {
-                cell.movieTheaterCount.text = "\(movie.theaters.count) salles"
-                cell.movieTheaterCount.setNeedsDisplay()
+        func showsDidload(data: NSDictionary?) {
+            
+            if let data = data {
+                movies[indexPath.row].dataToTheater(data)
+                if cell.movieTheaterCount.text != String(movie.theaters.count) {
+                    cell.movieTheaterCount.text = "\(movie.theaters.count) salles"
+                    cell.movieTheaterCount.setNeedsDisplay()
+                }
+            } else {
+                // TODO: show a label that says it's impossible to get location
             }
         }
         
@@ -111,15 +138,15 @@ class MovieListTableViewController : UITableViewController {
     }
     
     /*
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        
-        if let detailViewControler = self.delegate as? DetailViewController {
-            splitViewController?.showDetailViewController(detailViewControler.navigationController!, sender: nil)
-        }
-    }
- */
- 
+     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+     
+     
+     if let detailViewControler = self.delegate as? DetailViewController {
+     splitViewController?.showDetailViewController(detailViewControler.navigationController!, sender: nil)
+     }
+     }
+     */
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow {

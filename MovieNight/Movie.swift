@@ -91,25 +91,25 @@ class Movie {
     }
     
     func dataToTheater(data: NSDictionary) {
-        let theaterList = data["theaterShowtimes"] as! NSArray
-        for item in theaterList {
-            let place = (item as! NSDictionary)["place"] as! NSDictionary?
-            let theater = place?["theater"] as! NSDictionary?
-            
-            print(theater)
-            let name = theater?["name"] as! String?
-            let postalCode = (theater?["postalCode"] as! String?)
-            let lat = (theater?["geoloc"] as! NSDictionary?)?["lat"] as! Float?
-            let long = (theater?["geoloc"] as! NSDictionary?)?["long"] as! Float?
-            
-            if (name != nil && postalCode != nil && lat != nil && long != nil) {
-                theaters.append(Theater(name: name!, postalCode: Int(postalCode!)!, lat: lat!, long: long!))
+        if let theaterList = data["theaterShowtimes"] as! NSArray? {
+            for item in theaterList {
+                let place = (item as! NSDictionary)["place"] as! NSDictionary?
+                let theater = place?["theater"] as! NSDictionary?
+                
+                let name = theater?["name"] as! String?
+                let postalCode = (theater?["postalCode"] as! String?)
+                let lat = (theater?["geoloc"] as! NSDictionary?)?["lat"] as! Float?
+                let long = (theater?["geoloc"] as! NSDictionary?)?["long"] as! Float?
+                
+                if (name != nil && postalCode != nil && lat != nil && long != nil) {
+                    theaters.append(Theater(name: name!, postalCode: Int(postalCode!)!, lat: lat!, long: long!))
+                }
             }
         }
-        theatersIsSet = true
     }
     
-    func fillTheater(api: MovieNightAPI, callBack: (NSDictionary) -> Void) {
-        api.getShows(45.7573950, long: 4.8572230, code: code, callBack: callBack)
+    func fillTheater(api: MovieNightAPI, callBack: (NSDictionary?) -> Void) {
+        api.getShows(code, callBack: callBack)
+        theatersIsSet = true
     }
 }

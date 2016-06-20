@@ -9,6 +9,8 @@
 import UIKit
 import Alamofire
 import CryptoSwift
+import CoreLocation
+
 
 extension String {
     
@@ -76,10 +78,27 @@ class MovieNightAPI {
         self.request("movielist", params: ["count": "30", "partner": partnerKey, "filter": "nowshowing"], callBack: callBack)
     }
     
-    func getShows(lat: Float, long: Float, code: Int, callBack: (NSDictionary) -> Void) {
-        self.request("showtimelist", params: ["partner": partnerKey, "count": "20",
-            "lat": "\(lat)", "long": "\(long)", "profile": "medium",
-            "radius": "10", "movie": "\(code)"], callBack: callBack)
+    func getShows(code: Int, callBack: (NSDictionary?) -> Void) {
+        
+        if let locValue = MovieListTableViewController.locValue {
+        
+            self.request("showtimelist", params: ["partner": partnerKey, "count": "20",
+                "lat": "\(locValue.latitude)", "long": "\(locValue.longitude)", "profile": "medium",
+                "radius": "10", "movie": "\(code)"], callBack: callBack)
+        } else {
+            
+            /* TODO: complete this never
+ 
+            if CLLocationManager.locationServicesEnabled() {
+                
+                if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.Denied {
+                    let alert = UIAlertController(title: "App Permission Denied", message: "To re-enable, please go to Settings and turn on Location Service for this app.", preferredStyle: .Alert)
+                    self.
+                }
+            }
+            */
+            callBack(nil)
+        }
     }
     
     func movieList(infos: NSArray) -> [Movie] {
