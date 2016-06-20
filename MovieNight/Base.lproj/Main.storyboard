@@ -83,6 +83,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <activityIndicatorView key="tableFooterView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" id="a6t-Dj-BIr">
+                            <rect key="frame" x="0.0" y="242" width="600" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </activityIndicatorView>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="movieCell" id="Lzv-Rl-7e6" customClass="MovieTableViewCell" customModule="MovieNight" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="600" height="150"/>
@@ -203,6 +207,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Meilleurs films à l'affiche" id="La1-Ap-zub"/>
+                    <connections>
+                        <outlet property="loader" destination="a6t-Dj-BIr" id="tJg-Ms-M5S"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cm3-L5-nYD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

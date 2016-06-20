@@ -23,6 +23,7 @@ class MovieListTableViewController : UITableViewController, CLLocationManagerDel
     weak var delegate: MovieListDelegate?
     let api = MovieNightAPI(partnerKey: "100043982026", secretKey: "29d185d98c984a359e6e6f26a0474269")
     var calledApi = false
+    @IBOutlet weak var loader: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +36,10 @@ class MovieListTableViewController : UITableViewController, CLLocationManagerDel
         self.splitViewController?.preferredDisplayMode = .AllVisible
         
         getLocation()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        loader.center = self.view.center
     }
     
     func getLocation() {
@@ -73,6 +78,7 @@ class MovieListTableViewController : UITableViewController, CLLocationManagerDel
     func populateTableView(data: NSDictionary) {
         movies = api.movieList(data["movie"] as! NSArray)
         sortMovies()
+        loader.hidden = true
         tableView.reloadData()
     }
     
