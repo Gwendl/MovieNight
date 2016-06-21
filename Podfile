@@ -7,6 +7,7 @@ target 'MovieNight' do
 
 pod 'Alamofire', '~> 3.4'
 pod 'CryptoSwift'
+pod 'ASHorizontalScrollView', '~> 1.2'
 
 end
 
