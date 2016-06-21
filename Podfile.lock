@@ -1,15 +1,18 @@
 PODS:
   - Alamofire (3.4.0)
+  - ASHorizontalScrollView (1.2)
   - CryptoSwift (0.5)
 
 DEPENDENCIES:
   - Alamofire (~> 3.4)
+  - ASHorizontalScrollView (~> 1.2)
   - CryptoSwift
 
 SPEC CHECKSUMS:
   Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
+  ASHorizontalScrollView: 90287d2e6544cfc81d33f7bf91b6af85ec62f9a5
   CryptoSwift: b89d89caad9e5bc417b054078635eeb22bcddf54
 
-PODFILE CHECKSUM: a1e9cae8c6537267345d917caaa12d4acb4149fd
+PODFILE CHECKSUM: bb00688474c7309e096a642a0ec6b7297104063a
 
 COCOAPODS: 1.0.0

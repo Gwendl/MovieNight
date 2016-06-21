@@ -23,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="YEf-XP-KGG">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="513"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="1521"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="maxresdefault" translatesAutoresizingMaskIntoConstraints="NO" id="PHn-PU-sEL">
                                                 <rect key="frame" x="0.0" y="0.0" width="600" height="210"/>
@@ -34,6 +34,9 @@
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="BgN-IW-ur0">
                                                 <rect key="frame" x="0.0" y="218" width="600" height="100"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <accessibility key="accessibilityConfiguration">
+                                                    <accessibilityTraits key="traits" notEnabled="YES"/>
+                                                </accessibility>
                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor inconsectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Eem ipoen legum odioque civiuda.</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -41,11 +44,61 @@
                                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="beK-wS-63s">
                                                 <rect key="frame" x="0.0" y="326" width="600" height="187"/>
                                             </mapView>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1gw-CB-Z1K">
+                                                <rect key="frame" x="0.0" y="521" width="600" height="1000"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <prototypes>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="theaterCell" rowHeight="100" id="hS7-ka-dk9" customClass="TheaterTableViewCell" customModule="MovieNight" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="28" width="600" height="100"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hS7-ka-dk9" id="mFX-NB-t8J">
+                                                            <rect key="frame" x="0.0" y="0.0" width="600" height="99"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UUd-x9-CfQ">
+                                                                    <rect key="frame" x="14" y="-2" width="498" height="34"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="34" id="VH9-Yb-Cw9"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G4x-Zs-buM">
+                                                                    <rect key="frame" x="522" y="-2" width="70" height="34"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="34" id="KBx-Rd-f9W"/>
+                                                                        <constraint firstAttribute="width" constant="70" id="Z3q-tR-36A"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="UUd-x9-CfQ" firstAttribute="top" secondItem="mFX-NB-t8J" secondAttribute="topMargin" constant="-10" id="NYw-ZC-fFq"/>
+                                                                <constraint firstItem="G4x-Zs-buM" firstAttribute="leading" secondItem="UUd-x9-CfQ" secondAttribute="trailing" constant="10" id="Nhj-Bs-sqh"/>
+                                                                <constraint firstItem="UUd-x9-CfQ" firstAttribute="leading" secondItem="mFX-NB-t8J" secondAttribute="leadingMargin" constant="6" id="ni0-Zg-sDN"/>
+                                                                <constraint firstItem="G4x-Zs-buM" firstAttribute="top" secondItem="mFX-NB-t8J" secondAttribute="topMargin" constant="-10" id="sPw-3P-daz"/>
+                                                                <constraint firstItem="G4x-Zs-buM" firstAttribute="trailing" secondItem="mFX-NB-t8J" secondAttribute="trailingMargin" id="ylX-o0-JrL"/>
+                                                            </constraints>
+                                                        </tableViewCellContentView>
+                                                        <connections>
+                                                            <outlet property="theaterDistance" destination="G4x-Zs-buM" id="vKi-rM-iOe"/>
+                                                            <outlet property="theaterName" destination="UUd-x9-CfQ" id="3g6-WA-TOV"/>
+                                                        </connections>
+                                                    </tableViewCell>
+                                                </prototypes>
+                                            </tableView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="PHn-PU-sEL" firstAttribute="top" secondItem="YEf-XP-KGG" secondAttribute="top" id="7Uj-Je-nBR"/>
+                                            <constraint firstAttribute="trailing" secondItem="1gw-CB-Z1K" secondAttribute="trailing" id="HTj-qd-dCo"/>
+                                            <constraint firstItem="1gw-CB-Z1K" firstAttribute="centerX" secondItem="YEf-XP-KGG" secondAttribute="centerX" id="IZC-Ii-vyk"/>
                                             <constraint firstItem="PHn-PU-sEL" firstAttribute="leading" secondItem="YEf-XP-KGG" secondAttribute="leading" id="O13-EL-I3W"/>
+                                            <constraint firstItem="1gw-CB-Z1K" firstAttribute="top" secondItem="beK-wS-63s" secondAttribute="bottom" constant="8" id="YVy-Vd-K7Z"/>
                                             <constraint firstAttribute="trailing" secondItem="PHn-PU-sEL" secondAttribute="trailing" id="eJr-Pv-rPd"/>
+                                            <constraint firstItem="1gw-CB-Z1K" firstAttribute="leading" secondItem="YEf-XP-KGG" secondAttribute="leading" id="eVv-6Z-kYC"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
@@ -68,12 +121,15 @@
                     </view>
                     <navigationItem key="navigationItem" id="RbY-k2-ryF"/>
                     <connections>
+                        <outlet property="mapView" destination="beK-wS-63s" id="SnL-iH-brx"/>
                         <outlet property="movieImage" destination="PHn-PU-sEL" id="snG-cP-Muy"/>
+                        <outlet property="synopsisTextView" destination="BgN-IW-ur0" id="O1J-hp-EgL"/>
+                        <outlet property="tableView" destination="1gw-CB-Z1K" id="kPR-rm-Boe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yKO-mI-QLz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1133" y="854"/>
+            <point key="canvasLocation" x="1212" y="739"/>
         </scene>
         <!--Meilleurs films à l'affiche-->
         <scene sceneID="WZM-Gg-wKO">

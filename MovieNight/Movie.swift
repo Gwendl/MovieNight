@@ -15,12 +15,15 @@ class Movie {
         let lat: Float
         let long: Float
         let postalCode: Int
+        let distance: Float
+        var showTimes: [String] = []
         
-        init (name: String, postalCode: Int, lat: Float, long: Float) {
+        init (name: String, postalCode: Int, lat: Float, long: Float, distance: Float) {
             self.name = name
             self.postalCode = postalCode
             self.lat = lat
             self.long = long
+            self.distance = distance
         }
     }
     
@@ -33,16 +36,27 @@ class Movie {
     let name: String
     let code: Int
     let rate: Float
+    let synopsis: String
     var theaters: [Theater] = []
     var theatersIsSet = false
     
-    init(name: String, code: Int, rate: Float, posterURL: NSURL, thumbNailURL: NSURL)
+    init(name: String, code: Int, rate: Float, synopsis: String, posterURL: NSURL, thumbNailURL: NSURL)
     {
         self.name = name
         self.rate = rate
         self.posterURL = posterURL
         self.thumbNailURL = thumbNailURL
         self.code = code
+        self.synopsis = synopsis
+    }
+    
+    init () {
+        name = ""
+        rate = 0
+        posterURL = NSURL(string: "")!
+        thumbNailURL = NSURL(string: "")!
+        code = 0
+        synopsis = ""
     }
     
     private func getDataFromUrl(url:NSURL, completion: ((data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void)) {
@@ -68,7 +82,7 @@ class Movie {
             getDataFromUrl(posterURL) { (data, response, error)  in
                 if let data = data {
                     let image = UIImage(data: data)
-
+                    
                     if isPoster {
                         self.poster = image
                     } else {
@@ -92,17 +106,34 @@ class Movie {
     
     func dataToTheater(data: NSDictionary) {
         if let theaterList = data["theaterShowtimes"] as! NSArray? {
+            
             for item in theaterList {
+                let todayShows = ((((item["movieShowtimes"] as! NSArray)[0] as! NSDictionary)["scr"] as! NSArray)[0] as! NSDictionary)
+                
+                let date = NSDate()
+                let calendar = NSCalendar.currentCalendar()
+                let components = calendar.components([.Day , .Month , .Year], fromDate: date)
+                let today = String(components.year) + "-" + String(format: "%02d", components.month)
+                    + "-" + String(format: "%02d", components.day)
+                
+                var showTimes = [String]()
+                if today == todayShows["d"] as! String {
+                    for show in todayShows["t"] as! NSArray {
+                        showTimes.append((show as! NSDictionary)["$"] as! String)
+                    }
+                }
+                
                 let place = (item as! NSDictionary)["place"] as! NSDictionary?
                 let theater = place?["theater"] as! NSDictionary?
-                
+                let distance = theater!["distance"] as! Float?
                 let name = theater?["name"] as! String?
                 let postalCode = (theater?["postalCode"] as! String?)
                 let lat = (theater?["geoloc"] as! NSDictionary?)?["lat"] as! Float?
                 let long = (theater?["geoloc"] as! NSDictionary?)?["long"] as! Float?
                 
-                if (name != nil && postalCode != nil && lat != nil && long != nil) {
-                    theaters.append(Theater(name: name!, postalCode: Int(postalCode!)!, lat: lat!, long: long!))
+                if (name != nil && postalCode != nil && lat != nil && long != nil && distance != nil) {
+                    theaters.append(Theater(name: name!, postalCode: Int(postalCode!)!, lat: lat!, long: long!, distance: distance!))
+                    theaters.last?.showTimes = showTimes
                 }
             }
         }

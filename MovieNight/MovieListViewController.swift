@@ -149,10 +149,11 @@ class MovieListTableViewController : UITableViewController, CLLocationManagerDel
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
-            if let indexPath = self.tableView.indexPathForSelectedRow {
+            if self.tableView.indexPathForSelectedRow != nil {
                 let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
                 controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
                 controller.navigationItem.leftItemsSupplementBackButton = true
+                controller.movie = movies[(tableView.indexPathForSelectedRow?.row)!]
             }
         }
     }

@@ -58,13 +58,10 @@ class MovieNightAPI {
         let finalString = NSString(data: base64Decoded, encoding: NSUTF8StringEncoding)
         query += "&sig=" + (finalString as! String)
         
-        print(queryURL + query)
-        
         Alamofire.request(.POST, queryURL + query,  encoding:.JSON).responseJSON
             { response in switch response.result {
             case .Success(let JSON):
                 let data = JSON as! NSDictionary
-              //  print(data)
                 let feed = data.valueForKey("feed") as! NSDictionary
                 callBack(feed)
                 
@@ -106,35 +103,35 @@ class MovieNightAPI {
         
         for movie in infos {
             let m = movie as! NSDictionary
-            let title = m.valueForKey("title") as! String?
-            let code = m.valueForKey("code") as! Int?
+            let title = m["title"] as! String?
+            let code = m["code"] as! Int?
+            let synopsys = m["synopsisShort"] as! String?
             
-            
-            let statistics = m.valueForKey("statistics") as! NSDictionary?
-            let userRating = statistics?.valueForKey("userRating") as! Float?
+            let statistics = m["statistics"] as! NSDictionary?
+            let userRating = statistics?["userRating"]		 as! Float?
             let salles = statistics?["theaterCount"] as! Int?
             
             
-            let poster = m.valueForKey("poster") as! NSDictionary?
-            let posterURLString = poster?.valueForKey("href") as! String?
+            let poster = m["poster"] as! NSDictionary?
+            let posterURLString = poster?["href"] as! String?
             var posterURL: NSURL? = nil
             if posterURLString != nil {
                 posterURL = NSURL(string: posterURLString!)
             }
             
-            let defaultMedia = m.valueForKey("defaultMedia") as! NSDictionary?
-            let media = defaultMedia?.valueForKey("media") as! NSDictionary?
-            let thumbNail = media?.valueForKey("thumbnail") as! NSDictionary?
-            let thumbNailURLString = thumbNail?.valueForKey("href") as! String?
+            let defaultMedia = m["defaultMedia"] as! NSDictionary?
+            let media = defaultMedia?["media"] as! NSDictionary?
+            let thumbNail = media?["thumbnail"] as! NSDictionary?
+            let thumbNailURLString = thumbNail?["href"] as! String?
             var thumbNailURL: NSURL? = nil
             if thumbNailURLString != nil {
                 thumbNailURL = NSURL(string: thumbNailURLString!)
             }
             
             if (thumbNailURL != nil && posterURL != nil && title != nil &&
-                code != nil && userRating != nil && salles != nil) {
+                code != nil && userRating != nil && salles != nil && synopsys != nil) {
                 
-                movieList.append(Movie(name: title!, code: code!, rate: userRating!, posterURL: posterURL!, thumbNailURL: thumbNailURL!))
+                movieList.append(Movie(name: title!, code: code!, rate: userRating!, synopsis: synopsys!, posterURL: posterURL!, thumbNailURL: thumbNailURL!))
             }
         }
         return movieList
