@@ -120,7 +120,7 @@ class MovieListTableViewController : UITableViewController, CLLocationManagerDel
         cell.movieName.text = movie.name
         
         // set theaterCount
-        cell.movieTheaterCount.text = "\(movie.theaters.count) salles"
+        cell.movieTheaterCount.text = movie.theaters.count > 0 ? "\(movie.theaters.count) salles" : "chargement..."
         
         func setImage(image: UIImage, loaded: Bool) {
             
@@ -159,7 +159,8 @@ class MovieListTableViewController : UITableViewController, CLLocationManagerDel
                 let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
                 controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
                 controller.navigationItem.leftItemsSupplementBackButton = true
-                controller.movie = movies[(tableView.indexPathForSelectedRow?.row)!]
+                
+                controller.setMovie(movies[(tableView.indexPathForSelectedRow?.row)!])
             }
         }
     }

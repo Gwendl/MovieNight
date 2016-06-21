@@ -40,6 +40,8 @@ class Movie {
     var theaters: [Theater] = []
     var theatersIsSet = false
     
+    var onShowtimesLoad: (() -> ())?
+    
     init(name: String, code: Int, rate: Float, synopsis: String, posterURL: NSURL, thumbNailURL: NSURL)
     {
         self.name = name
@@ -136,6 +138,7 @@ class Movie {
                     theaters.last?.showTimes = showTimes
                 }
             }
+            self.onShowtimesLoad?()
         }
     }
     

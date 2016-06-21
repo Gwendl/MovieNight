@@ -15,7 +15,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var tableView: UITableView!
     
-    var movie = Movie()
+    var movie: Movie?
     let regionRadius: CLLocationDistance = 1000
     
     let tvController = TheaterTableViewController()
@@ -28,9 +28,14 @@ class DetailViewController: UIViewController {
     }
     
     func configureView() {
-        synopsisTextView.text = movie.synopsis
-        let initialLocation = CLLocation(latitude: 45.7573950, longitude: 4.8572230)
-        centerMapOnLocation(initialLocation)
+        
+        synopsisTextView.text = movie?.synopsis ?? "Aucun film sélectionné."
+        
+        if let locValue = MovieListTableViewController.locValue {
+            
+            let initialLocation = CLLocation(latitude: locValue.latitude, longitude: locValue.longitude)
+            centerMapOnLocation(initialLocation)
+        }
     }
     
     func centerMapOnLocation(location: CLLocation) {
@@ -39,13 +44,37 @@ class DetailViewController: UIViewController {
         mapView.setRegion(coordinateRegion, animated: true)
     }
     
+    func loadShowtimes() {
+        
+        if movie == nil {
+            return
+        }
+        
+        if movie!.theaters.count == 0 {
+            return
+        }
+        
+        if tvController.tableView == nil {
+            return
+        }
+        
+        tvController.movie = movie!
+        tableView.reloadData()
+        configureView()
+    }
+    
+    func setMovie(film: Movie) {
+        
+        self.movie = film
+        film.onShowtimesLoad = loadShowtimes
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tvController.movie = movie
         tableView.delegate = tvController
         tableView.dataSource = tvController
+        loadShowtimes()
         self.configureView()
     }
     
