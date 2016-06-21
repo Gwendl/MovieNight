@@ -16,7 +16,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var movie: Movie?
-    let regionRadius: CLLocationDistance = 1000
+    var regionRadius: CLLocationDistance = 1000
     
     let tvController = TheaterTableViewController()
     
@@ -31,10 +31,22 @@ class DetailViewController: UIViewController {
         
         synopsisTextView.text = movie?.synopsis ?? "Aucun film sélectionné."
         
-        if let locValue = MovieListTableViewController.locValue {
+        if MovieListTableViewController.locValue != nil {
             
-            let initialLocation = CLLocation(latitude: locValue.latitude, longitude: locValue.longitude)
+            synopsisTextView.text = movie!.synopsis
+            let initialLocation = CLLocation(latitude: 45.7573950, longitude: 4.8572230)
+            
+            if let customRadius = (movie!.theaters.map{$0.distance}).maxElement() {
+                regionRadius = Double(customRadius * 1000)
+            }
             centerMapOnLocation(initialLocation)
+            mapView.showsUserLocation = true
+            
+            for theater in movie!.theaters {
+                let pin = Theater(title: theater.name, locationName: "", discipline: "Cinema",
+                                  coordinate: CLLocationCoordinate2D(latitude: Double(theater.lat), longitude: Double(theater.long)))
+                mapView.addAnnotation(pin)
+            }
         }
     }
     
@@ -75,6 +87,7 @@ class DetailViewController: UIViewController {
         tableView.delegate = tvController
         tableView.dataSource = tvController
         loadShowtimes()
+        mapView.delegate = self
         self.configureView()
     }
     
