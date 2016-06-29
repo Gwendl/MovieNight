@@ -29,7 +29,9 @@ class DetailViewController: UIViewController {
     
     func configureView() {
         
+        movie?.usethumbNail(setThumbNail)
         synopsisTextView.text = movie?.synopsis ?? "Aucun film sélectionné."
+        
         
         if MovieListTableViewController.locValue != nil {
             
@@ -48,6 +50,11 @@ class DetailViewController: UIViewController {
                 mapView.addAnnotation(pin)
             }
         }
+    }
+    
+    func setThumbNail(image: UIImage, _: Bool) {
+        movieImage.image = image
+        movieImage.setNeedsDisplay()
     }
     
     func centerMapOnLocation(location: CLLocation) {
@@ -81,6 +88,12 @@ class DetailViewController: UIViewController {
         film.onShowtimesLoad = loadShowtimes
     }
     
+    func imageTapped(img: AnyObject) {
+        let stringURL = "https://www.youtube.com/results?search_query=bande+annonce+" + ((self.movie?.name)!).stringByReplacingOccurrencesOfString(" ", withString: "+")
+        let URL = NSURL(string: stringURL)!
+        UIApplication.sharedApplication().openURL(URL)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -88,6 +101,8 @@ class DetailViewController: UIViewController {
         tableView.dataSource = tvController
         loadShowtimes()
         mapView.delegate = self
+        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(DetailViewController.imageTapped(_:)))
+        movieImage.addGestureRecognizer(tapGestureRecognizer)
         self.configureView()
     }
     
