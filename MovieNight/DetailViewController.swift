@@ -92,8 +92,9 @@ class DetailViewController: UIViewController {
     
     func imageTapped() {
         let stringURL = "https://www.youtube.com/results?search_query=bande+annonce+" + ((self.movie?.name)!).stringByReplacingOccurrencesOfString(" ", withString: "+")
-        let URL = NSURL(string: stringURL)!
-        UIApplication.sharedApplication().openURL(URL)
+        if let URL = NSURL(string: stringURL) {
+            UIApplication.sharedApplication().openURL(URL)
+        }
     }
     
     func mapTapped() {

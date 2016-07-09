@@ -7,18 +7,19 @@
 //
 
 import UIKit
+import MapKit
 import ASHorizontalScrollView
 
 class TheaterTableViewController: UITableViewController {
     
     var movie = Movie()
+    var mapViewReference: MKMapView?
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //tableView.frame = CGRectMake(tableView.frame.origin.x, tableView.frame.origin.y, tableView.frame.size.width, tableView.contentSize.height);
         return movie.theaters.count
     }
     
@@ -62,8 +63,10 @@ class TheaterTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let bigMap = mapVC()
-        bigMap.annotations = mapView.annotations
-        bigMap.region = mapView.region
+        if let annotations = mapViewReference?.annotations[indexPath.row] {
+            bigMap.annotations = [annotations]
+        }
+        bigMap.region = mapViewReference?.region
         navigationController?.pushViewController(bigMap, animated: true)
     }
     
