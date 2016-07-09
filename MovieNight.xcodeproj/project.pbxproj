@@ -19,6 +19,7 @@
 		A06063891D1693C500BA513F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A06063881D1693C500BA513F /* MapKit.framework */; };
 		A060638B1D16D87C00BA513F /* TheaterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A060638A1D16D87C00BA513F /* TheaterTableViewCell.swift */; };
 		A060638D1D16E21700BA513F /* TheaterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A060638C1D16E21700BA513F /* TheaterTableViewController.swift */; };
+		A0B6C3351D2D2E4400D582DC /* mapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B6C3341D2D2E4400D582DC /* mapVC.swift */; };
 		A0D2C9D91D0EC14900F09139 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D2C9D81D0EC14900F09139 /* DetailViewController.swift */; };
 		A0D58E9B1D0EDFAD00A9D3BD /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D58E9A1D0EDFAD00A9D3BD /* Movie.swift */; };
 		A0EC544C1D192F3A00BC7606 /* VCMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EC544B1D192F3A00BC7606 /* VCMapView.swift */; };
@@ -42,6 +43,7 @@
 		A06063881D1693C500BA513F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		A060638A1D16D87C00BA513F /* TheaterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TheaterTableViewCell.swift; sourceTree = "<group>"; };
 		A060638C1D16E21700BA513F /* TheaterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TheaterTableViewController.swift; sourceTree = "<group>"; };
+		A0B6C3341D2D2E4400D582DC /* mapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mapVC.swift; sourceTree = "<group>"; };
 		A0D2C9D81D0EC14900F09139 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		A0D58E9A1D0EDFAD00A9D3BD /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		A0EC544B1D192F3A00BC7606 /* VCMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCMapView.swift; sourceTree = "<group>"; };
@@ -106,8 +108,9 @@
 				A0D58E9A1D0EDFAD00A9D3BD /* Movie.swift */,
 				93929D531CCFEE9100B23EC4 /* MovieListViewController.swift */,
 				A0D2C9D81D0EC14900F09139 /* DetailViewController.swift */,
-				A03F40641CCFC20E0020201E /* Main.storyboard */,
 				A060638C1D16E21700BA513F /* TheaterTableViewController.swift */,
+				A03F40641CCFC20E0020201E /* Main.storyboard */,
+				A0B6C3341D2D2E4400D582DC /* mapVC.swift */,
 				A0EC544B1D192F3A00BC7606 /* VCMapView.swift */,
 				A0EC544D1D192F8A00BC7606 /* Theater.swift */,
 				20C188291D0BFF940001C3A2 /* MovieTableViewCell.swift */,
@@ -132,6 +135,7 @@
 				A03F405B1CCFC20E0020201E /* Resources */,
 				9CF28824B6CFB873987BDCD6 /* 📦 Embed Pods Frameworks */,
 				7D54C4C9D0BCB417B52427A1 /* 📦 Copy Pods Resources */,
+				0BB15602D2B92F6672E7BD1A /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -201,6 +205,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0BB15602D2B92F6672E7BD1A /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MovieNight/Pods-MovieNight-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		7D54C4C9D0BCB417B52427A1 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -258,6 +277,7 @@
 				A0EC544C1D192F3A00BC7606 /* VCMapView.swift in Sources */,
 				93929D541CCFEE9100B23EC4 /* MovieListViewController.swift in Sources */,
 				A03F40631CCFC20E0020201E /* ViewController.swift in Sources */,
+				A0B6C3351D2D2E4400D582DC /* mapVC.swift in Sources */,
 				A05CDCD51CD15A3B00258960 /* MovieNightAPI.swift in Sources */,
 				A060638D1D16E21700BA513F /* TheaterTableViewController.swift in Sources */,
 				A060638B1D16D87C00BA513F /* TheaterTableViewCell.swift in Sources */,
@@ -307,6 +327,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;

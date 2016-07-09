@@ -17,6 +17,7 @@ class DetailViewController: UIViewController {
     
     var movie: Movie?
     var regionRadius: CLLocationDistance = 1000
+    var initialLocation: CLLocation? = nil
     
     let tvController = TheaterTableViewController()
     
@@ -36,13 +37,14 @@ class DetailViewController: UIViewController {
         if MovieListTableViewController.locValue != nil {
             
             synopsisTextView.text = movie!.synopsis
-            let initialLocation = CLLocation(latitude: 45.7573950, longitude: 4.8572230)
+            mapView.showsUserLocation = true
             
             if let customRadius = (movie!.theaters.map{$0.distance}).maxElement() {
                 regionRadius = Double(customRadius * 1000)
             }
-            centerMapOnLocation(initialLocation)
-            mapView.showsUserLocation = true
+            if let unwrapedInitialLocation = initialLocation {
+                centerMapOnLocation(unwrapedInitialLocation)
+            }
             
             for theater in movie!.theaters {
                 let pin = Theater(title: theater.name, locationName: "", discipline: "Cinema",
@@ -88,10 +90,17 @@ class DetailViewController: UIViewController {
         film.onShowtimesLoad = loadShowtimes
     }
     
-    func imageTapped(img: AnyObject) {
+    func imageTapped() {
         let stringURL = "https://www.youtube.com/results?search_query=bande+annonce+" + ((self.movie?.name)!).stringByReplacingOccurrencesOfString(" ", withString: "+")
         let URL = NSURL(string: stringURL)!
         UIApplication.sharedApplication().openURL(URL)
+    }
+    
+    func mapTapped() {
+        let bigMap = mapVC()
+        bigMap.annotations = mapView.annotations
+        bigMap.region = mapView.region
+        navigationController?.pushViewController(bigMap, animated: true)
     }
     
     override func viewDidLoad() {
@@ -101,8 +110,11 @@ class DetailViewController: UIViewController {
         tableView.dataSource = tvController
         loadShowtimes()
         mapView.delegate = self
-        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(DetailViewController.imageTapped(_:)))
-        movieImage.addGestureRecognizer(tapGestureRecognizer)
+        let tapGestureRecognizerImage = UITapGestureRecognizer(target:self, action:#selector(imageTapped))
+        let tapGestureRecognizerMap = UITapGestureRecognizer(target: self, action: #selector(mapTapped))
+        movieImage.addGestureRecognizer(tapGestureRecognizerImage)
+        mapView.addGestureRecognizer(tapGestureRecognizerMap)
+        
         self.configureView()
     }
     

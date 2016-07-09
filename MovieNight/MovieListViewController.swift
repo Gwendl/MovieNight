@@ -161,6 +161,7 @@ class MovieListTableViewController : UITableViewController, CLLocationManagerDel
                 controller.navigationItem.leftItemsSupplementBackButton = true
                 
                 controller.setMovie(movies[(tableView.indexPathForSelectedRow?.row)!])
+                controller.initialLocation = self.locationManager.location
             }
         }
     }

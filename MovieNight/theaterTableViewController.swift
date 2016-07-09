@@ -60,6 +60,13 @@ class TheaterTableViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let bigMap = mapVC()
+        bigMap.annotations = mapView.annotations
+        bigMap.region = mapView.region
+        navigationController?.pushViewController(bigMap, animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
