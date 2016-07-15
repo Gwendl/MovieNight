@@ -1,2 +1,2 @@
 # MovieNight
-Minimalistic allocing/IMDB app
+Minimalistic allociné/IMDB app

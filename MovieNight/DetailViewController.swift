@@ -36,7 +36,10 @@ class DetailViewController: UIViewController {
         
         if MovieListTableViewController.locValue != nil {
             
-            synopsisTextView.text = movie!.synopsis
+            var synopsis = movie!.synopsis
+            synopsis = synopsis.stringByReplacingOccurrencesOfString("<span>", withString: "")
+            synopsis = synopsis.stringByReplacingOccurrencesOfString("</span>", withString: "")
+            synopsisTextView.text = synopsis
             mapView.showsUserLocation = true
             
             if let customRadius = (movie!.theaters.map{$0.distance}).maxElement() {
