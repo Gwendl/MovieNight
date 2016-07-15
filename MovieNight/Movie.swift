@@ -81,7 +81,7 @@ class Movie {
         if let img = testimage {
             callBack(img, false)
         } else {
-            getDataFromUrl(posterURL) { (data, response, error)  in
+            getDataFromUrl(isPoster ? posterURL : thumbNailURL) { (data, response, error)  in
                 if let data = data {
                     let image = UIImage(data: data)
                     

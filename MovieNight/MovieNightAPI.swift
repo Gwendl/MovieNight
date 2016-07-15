@@ -100,25 +100,25 @@ class MovieNightAPI {
     
     func movieList(infos: NSArray) -> [Movie] {
         var movieList = [Movie]()
-        
+ 
         for movie in infos {
             let m = movie as! NSDictionary
             let title = m["title"] as! String?
             let code = m["code"] as! Int?
             let synopsys = m["synopsisShort"] as! String?
-            
+
             let statistics = m["statistics"] as! NSDictionary?
             let userRating = statistics?["userRating"]		 as! Float?
             let salles = statistics?["theaterCount"] as! Int?
-            
-            
+
+
             let poster = m["poster"] as! NSDictionary?
             let posterURLString = poster?["href"] as! String?
             var posterURL: NSURL? = nil
             if posterURLString != nil {
                 posterURL = NSURL(string: posterURLString!)
             }
-            
+
             let defaultMedia = m["defaultMedia"] as! NSDictionary?
             let media = defaultMedia?["media"] as! NSDictionary?
             let thumbNail = media?["thumbnail"] as! NSDictionary?
@@ -127,7 +127,7 @@ class MovieNightAPI {
             if thumbNailURLString != nil {
                 thumbNailURL = NSURL(string: thumbNailURLString!)
             }
-            
+
             if (thumbNailURL != nil && posterURL != nil && title != nil &&
                 code != nil && userRating != nil && salles != nil && synopsys != nil) {
                 
@@ -136,5 +136,5 @@ class MovieNightAPI {
         }
         return movieList
     }
-    
+
 }

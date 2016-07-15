@@ -9,11 +9,24 @@
 import UIKit
 import MapKit
 
+
+class MonPutainDeLabel: UILabel {
+    
+    override func drawTextInRect(rect: CGRect) {
+        let insets = UIEdgeInsets.init(top: 28, left: 16, bottom: 24, right: 12)
+        super.drawTextInRect(UIEdgeInsetsInsetRect(rect, insets))
+    }
+    
+    
+}
+
+
 class DetailViewController: UIViewController {
     @IBOutlet weak var movieImage: UIImageView!
     @IBOutlet weak var synopsisTextView: UITextView!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var putainDeTitleLabel: MonPutainDeLabel!
     
     var movie: Movie?
     var regionRadius: CLLocationDistance = 1000
@@ -39,7 +52,16 @@ class DetailViewController: UIViewController {
             var synopsis = movie!.synopsis
             synopsis = synopsis.stringByReplacingOccurrencesOfString("<span>", withString: "")
             synopsis = synopsis.stringByReplacingOccurrencesOfString("</span>", withString: "")
+            synopsis = synopsis.stringByReplacingOccurrencesOfString("<strong>", withString: "")
+            synopsis = synopsis.stringByReplacingOccurrencesOfString("</strong>", withString: "")
             synopsisTextView.text = synopsis
+            synopsisTextView.textContainerInset = UIEdgeInsets(top: 8, left: 12, bottom: 12, right: 12)
+            
+
+            putainDeTitleLabel.text = movie!.name
+            putainDeTitleLabel.adjustsFontSizeToFitWidth = true;
+ 
+            
             mapView.showsUserLocation = true
             
             if let customRadius = (movie!.theaters.map{$0.distance}).maxElement() {
