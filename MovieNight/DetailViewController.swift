@@ -34,7 +34,6 @@ class DetailViewController: UIViewController {
     
     let tvController = TheaterTableViewController()
     
-    
     var detailItem: AnyObject? {
         didSet {
             self.configureView()
@@ -43,6 +42,7 @@ class DetailViewController: UIViewController {
     
     func configureView() {
         
+        tvController.mapViewReference = mapView
         movie?.usethumbNail(setThumbNail)
         synopsisTextView.text = movie?.synopsis ?? "Aucun film sélectionné."
         

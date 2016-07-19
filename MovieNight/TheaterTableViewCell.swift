@@ -12,4 +12,5 @@ class TheaterTableViewCell: UITableViewCell {
 
     @IBOutlet weak var theaterName: UILabel!
     @IBOutlet weak var theaterDistance: UILabel!
+    
 }
