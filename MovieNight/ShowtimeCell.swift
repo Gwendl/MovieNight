@@ -25,9 +25,9 @@ class ShowtimeCell: UITableViewCell {
         let movie = tableViewReference?.movie
                 theaterNameLabel.text = movie!.theaters[indexPath.row - 1].name
         let distanceToTheater = movie!.theaters[indexPath.row - 1].distance
-        distanceLabel.text = String(format: "%.2fkm", distanceToTheater)
+        distanceLabel.text = String(format: "%.2f km", distanceToTheater)
         
-        let showTimeView = ASHorizontalscrollViewWithIndex(frame:CGRectMake(0, 30, contentView.frame.size.width, 50), indexPath: indexPath)
+        let showTimeView = ASHorizontalscrollViewWithIndex(frame:CGRectMake(, 30, contentView.frame.size.width, 50), indexPath: indexPath)
         showTimeView.miniAppearPxOfLastItem = 10
         showTimeView.uniformItemSize = CGSizeMake(120, 20)
         //let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TheaterTableViewController.showTimeViewTapped(_:)))
