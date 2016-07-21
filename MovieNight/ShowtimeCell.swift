@@ -27,24 +27,27 @@ class ShowtimeCell: UITableViewCell {
         let distanceToTheater = movie!.theaters[indexPath.row - 1].distance
         distanceLabel.text = String(format: "%.2f km", distanceToTheater)
         
-        let showTimeView = ASHorizontalscrollViewWithIndex(frame:CGRectMake(0, 30, contentView.frame.size.width, 50), indexPath: indexPath)
-        showTimeView.miniAppearPxOfLastItem = 10
-        showTimeView.uniformItemSize = CGSizeMake(120, 20)
+        let showTimeView = ASHorizontalscrollViewWithIndex(frame:CGRectMake(0, 62, contentView.frame.size.width, 60), indexPath: indexPath)
+        showTimeView.miniAppearPxOfLastItem = 50
+        showTimeView.uniformItemSize = CGSizeMake(100, 40)
+        showTimeView.leftMarginPx = 24
         //let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TheaterTableViewController.showTimeViewTapped(_:)))
         //showTimeView.addGestureRecognizer(tapGestureRecognizer)
         
         let theater = tableViewReference!.movie?.theaters[indexPath.row - 1]
         if theater!.showTimes.count > 0 {
             for i in 0...theater!.showTimes.count - 1 {
-                let timeLabel = UIButton(frame: CGRectZero)
-                timeLabel.backgroundColor = UIColor.clearColor()
-                timeLabel.layer.cornerRadius = 5
-                timeLabel.layer.borderWidth = 1
-                timeLabel.layer.borderColor = UIColor.blackColor().CGColor
-                timeLabel.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
-                timeLabel.setTitle("\(theater!.showTimes[i]) (vf)", forState: UIControlState.Normal)
-                timeLabel.userInteractionEnabled = false
-                showTimeView.addItem(timeLabel)
+                let timeButton = UIButton(frame: CGRectZero)
+                timeButton.backgroundColor = UIColor.clearColor()
+                let pink = UIColor(red: 0xFF / 255, green: 0x40 / 255, blue: 0x5C / 255, alpha: 1)
+                timeButton.layer.cornerRadius = 2
+                timeButton.contentEdgeInsets = UIEdgeInsetsMake(8, 8, 8, 8);
+                timeButton.layer.borderWidth = 1
+                timeButton.layer.borderColor = pink.CGColor
+                timeButton.setTitleColor(pink, forState: UIControlState.Normal)
+                timeButton.setTitle("\(theater!.showTimes[i]) (vf)", forState: UIControlState.Normal)
+                timeButton.userInteractionEnabled = false
+                showTimeView.addItem(timeButton)
             }
         } else {
             showTimeView.uniformItemSize = CGSizeMake(220, 50)

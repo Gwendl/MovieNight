@@ -49,14 +49,14 @@ class InfoCell: UITableViewCell, MKMapViewDelegate {
     func cleanHTML(string: String) -> String {
         var cleanedString = string
         
-        cleanedString = cleanedString.stringByReplacingOccurrencesOfString("<span>", withString: "")
-        cleanedString = cleanedString.stringByReplacingOccurrencesOfString("</span>", withString: "")
-        cleanedString = cleanedString.stringByReplacingOccurrencesOfString("<strong>", withString: "")
-        cleanedString = cleanedString.stringByReplacingOccurrencesOfString("</strong>", withString: "")
+        if let regex = try? NSRegularExpression(pattern: "<[^>]*>", options: .CaseInsensitive) {
+            cleanedString = regex.stringByReplacingMatchesInString(string, options: .WithTransparentBounds, range: NSMakeRange(0, string.characters.count), withTemplate: "")
+        }
         return cleanedString
     }
     
     func configureCell() {
+        
         tableViewReference?.movie?.usethumbNail(setThumbNail)
         movieSynopsis.text = cleanHTML((tableViewReference?.movie?.synopsis)!)
         movieTitle.text = tableViewReference?.movie?.name

@@ -22,7 +22,10 @@ class DetailTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (movie?.theaters.count)! + 1
+        if let movieUnwrapped = movie {
+            return movieUnwrapped.theaters.count + 1
+        }
+        return 0
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -30,7 +33,7 @@ class DetailTableViewController: UITableViewController {
         if indexPath.row == 0 {
             return 750
         }
-        return 150
+        return 130
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

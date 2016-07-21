@@ -45,32 +45,29 @@ class DetailViewController: UIViewController {
         tvController.mapViewReference = mapView
         movie?.usethumbNail(setThumbNail)
         synopsisTextView.text = movie?.synopsis ?? "Aucun film sélectionné."
-        
-        
+
+
         if MovieListTableViewController.locValue != nil {
-            
+
             var synopsis = movie!.synopsis
-            synopsis = synopsis.stringByReplacingOccurrencesOfString("<span>", withString: "")
-            synopsis = synopsis.stringByReplacingOccurrencesOfString("</span>", withString: "")
-            synopsis = synopsis.stringByReplacingOccurrencesOfString("<strong>", withString: "")
-            synopsis = synopsis.stringByReplacingOccurrencesOfString("</strong>", withString: "")
+
             synopsisTextView.text = synopsis
             synopsisTextView.textContainerInset = UIEdgeInsets(top: 8, left: 12, bottom: 12, right: 12)
-            
+ 
 
             putainDeTitleLabel.text = movie!.name
             putainDeTitleLabel.adjustsFontSizeToFitWidth = true;
- 
-            
+
+
             mapView.showsUserLocation = true
-            
+
             if let customRadius = (movie!.theaters.map{$0.distance}).maxElement() {
                 regionRadius = Double(customRadius * 1000)
             }
             if let unwrapedInitialLocation = initialLocation {
                 centerMapOnLocation(unwrapedInitialLocation)
             }
-            
+
             for theater in movie!.theaters {
                 let pin = Theater(title: theater.name, locationName: "", discipline: "Cinema",
                                   coordinate: CLLocationCoordinate2D(latitude: Double(theater.lat), longitude: Double(theater.long)))
