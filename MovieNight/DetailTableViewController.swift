@@ -31,7 +31,7 @@ class DetailTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         if indexPath.row == 0 {
-            return 750
+            return 810
         }
         return 130
     }

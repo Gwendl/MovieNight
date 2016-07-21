@@ -25,13 +25,13 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hBx-D2-u6P">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="250"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="300" id="n4z-ZR-hMq"/>
+                                                <constraint firstAttribute="height" constant="250" id="n4z-ZR-hMq"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Titanic" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VVM-Tr-kuq">
-                                            <rect key="frame" x="16" y="316" width="576" height="55"/>
+                                            <rect key="frame" x="16" y="266" width="576" height="55"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="55" id="nHs-0g-ZaP"/>
                                             </constraints>
@@ -40,7 +40,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="efT-i3-B1H">
-                                            <rect key="frame" x="16" y="371" width="576" height="178.5"/>
+                                            <rect key="frame" x="16" y="321" width="576" height="178.5"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                             <color key="textColor" red="0.40801565226876091" green="0.40801565226876091" blue="0.40801565226876091" alpha="1" colorSpace="calibratedRGB"/>
@@ -48,13 +48,13 @@
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
                                         <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsUserLocation="YES" showsBuildings="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Muc-C1-v6m">
-                                            <rect key="frame" x="0.0" y="573" width="600" height="300"/>
+                                            <rect key="frame" x="0.0" y="523" width="600" height="300"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="300" id="Vsm-3y-W0P"/>
                                             </constraints>
                                         </mapView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Voir la bande annonce" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="So3-oh-dTJ">
-                                            <rect key="frame" x="349" y="270" width="223" height="26"/>
+                                            <rect key="frame" x="349" y="220" width="223" height="26"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
                                             <color key="textColor" red="0.88324880017452001" green="0.88324880017452001" blue="0.88324880017452001" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
