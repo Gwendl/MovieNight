@@ -62,7 +62,7 @@ class InfoCell: UITableViewCell, MKMapViewDelegate {
         movieTitle.text = tableViewReference?.movie?.name
         
         if let customRadius = (tableViewReference?.movie!.theaters.map{$0.distance})!.maxElement() {
-            regionRadius = Double(customRadius * 800)
+            regionRadius = Double(customRadius * 2000)
         }
         
         if let location = tableViewReference?.initialLocation {

@@ -50,7 +50,7 @@ class ShowtimeCell: UITableViewCell {
                 timeButton.layer.borderWidth = 1
                 timeButton.layer.borderColor = pink.CGColor
                 timeButton.setTitleColor(pink, forState: UIControlState.Normal)
-                timeButton.setTitle("\(theater!.showTimes[i]) (vf)", forState: UIControlState.Normal)
+                timeButton.setTitle("\(theater!.showTimes[i])", forState: UIControlState.Normal)
                 timeButton.userInteractionEnabled = false
                 showTimeView.addItem(timeButton)
             }
