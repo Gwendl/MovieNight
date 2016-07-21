@@ -120,7 +120,7 @@ class MovieListTableViewController : UITableViewController, CLLocationManagerDel
         cell.movieName.text = movie.name
         
         // set theaterCount
-        cell.movieTheaterCount.text = movie.theaters.count > 0 ? "\(movie.theaters.count) salles" : "chargement..."
+        cell.movieTheaterCount.text = movie.cinemasHaveLoaded || movie.theaters.count != 0 ? "\(movie.theaters.count) salles" : "chargement..."
         
         func setImage(image: UIImage, loaded: Bool) {
             

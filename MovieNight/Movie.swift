@@ -39,6 +39,7 @@ class Movie {
     let synopsis: String
     var theaters: [Theater] = []
     var theatersIsSet = false
+    var cinemasHaveLoaded = false
     
     var onShowtimesLoad: (() -> ())?
     
@@ -140,6 +141,7 @@ class Movie {
             }
             self.onShowtimesLoad?()
         }
+        self.cinemasHaveLoaded = true
     }
     
     func fillTheater(api: MovieNightAPI, callBack: (NSDictionary?) -> Void) {

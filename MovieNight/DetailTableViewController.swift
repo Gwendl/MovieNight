@@ -86,10 +86,10 @@ class DetailTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    func configureView() {
-    }
-    
-    override func viewDidLoad() {
-        configureView()
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as? ShowtimeCell
+        if let cellUnwrapped = cell {
+            cellUnwrapped.showMap()
+        }
     }
 }
