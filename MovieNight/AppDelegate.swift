@@ -46,11 +46,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     }
 
     func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController: UIViewController, ontoPrimaryViewController primaryViewController: UIViewController) -> Bool {
-        guard let secondaryAsNavController = secondaryViewController as? UINavigationController else { return false }
-        guard let topAsDetailcontroller = secondaryAsNavController.topViewController as? DetailViewController else { return false }
-        if topAsDetailcontroller.detailItem == nil {
-            return true // collapse handled
-        }
         return false
     }
 

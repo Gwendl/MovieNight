@@ -58,6 +58,8 @@ class InfoCell: UITableViewCell, MKMapViewDelegate {
     func configureCell() {
         
         tableViewReference?.movie?.usethumbNail(setThumbNail)
+        thumbnail.clipsToBounds = true
+ 
         movieSynopsis.text = cleanHTML((tableViewReference?.movie?.synopsis)!)
         movieTitle.text = tableViewReference?.movie?.name
         

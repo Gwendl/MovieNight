@@ -16,7 +16,7 @@ protocol MovieListDelegate: class {
 
 class MovieListTableViewController : UITableViewController, CLLocationManagerDelegate {
     
-    var detailViewController: DetailViewController? = nil
+    var detailViewController: DetailTableViewController? = nil
     let locationManager = CLLocationManager()
     static var locValue: CLLocationCoordinate2D?
     var movies: [Movie] = []
@@ -30,7 +30,7 @@ class MovieListTableViewController : UITableViewController, CLLocationManagerDel
         
         if let split = self.splitViewController {
             let controllers = split.viewControllers
-            self.detailViewController = (controllers[controllers.count - 1] as! UINavigationController).topViewController as? DetailViewController
+            self.detailViewController = (controllers[controllers.count - 1] as! UINavigationController).topViewController as? DetailTableViewController
         }
         
         self.splitViewController?.preferredDisplayMode = .AllVisible
