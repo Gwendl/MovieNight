@@ -168,7 +168,7 @@
 				TargetAttributes = {
 					A03F405C1CCFC20E0020201E = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 8XCF8YPAMS;
+						DevelopmentTeam = KA74PPR2DQ;
 						SystemCapabilities = {
 							com.apple.HomeKit = {
 								enabled = 0;
@@ -388,11 +388,12 @@
 			baseConfigurationReference = 8E6BED1C1AB5FA0D99FF918B /* Pods-MovieNight.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = MovieNight/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = igloo.MovieNight;
+				PRODUCT_BUNDLE_IDENTIFIER = mobi.igloo.movienight;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -404,11 +405,12 @@
 			baseConfigurationReference = 6F03D8DA23771BDE56100024 /* Pods-MovieNight.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = MovieNight/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = igloo.MovieNight;
+				PRODUCT_BUNDLE_IDENTIFIER = mobi.igloo.movienight;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
