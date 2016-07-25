@@ -17,29 +17,29 @@ class ShowtimeCell: UITableViewCell {
     var distance: Float?
     var theaterName: String?
     var tableViewReference: DetailTableViewController?
-    var cellIndex: NSIndexPath?
+    var cellIndex: Int = 0
     
     
     override func awakeFromNib() {
     }
     
-    func configureCell(indexPath: NSIndexPath)  {
+    func configureCell(indexPath: Int)  {
         
         self.cellIndex = indexPath
         
         let movie = tableViewReference?.movie
-                theaterNameLabel.text = movie!.theaters[indexPath.row - 1].name
-        let distanceToTheater = movie!.theaters[indexPath.row - 1].distance
+                theaterNameLabel.text = movie!.theaters[indexPath].name
+        let distanceToTheater = movie!.theaters[indexPath].distance
         distanceLabel.text = String(format: "%.2f km", distanceToTheater)
         
-        let showTimeView = ASHorizontalscrollViewWithIndex(frame:CGRectMake(0, 62, contentView.frame.size.width, 60), indexPath: indexPath)
+        let showTimeView = ASHorizontalscrollViewWithIndex(frame:CGRectMake(0, 62, contentView.frame.size.width, 60), indexPath: NSIndexPath(index: indexPath))
         showTimeView.miniAppearPxOfLastItem = 50
         showTimeView.uniformItemSize = CGSizeMake(100, 40)
         showTimeView.leftMarginPx = 24
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(showMap))
         showTimeView.addGestureRecognizer(tapGestureRecognizer)
         
-        let theater = tableViewReference!.movie?.theaters[indexPath.row - 1]
+        let theater = tableViewReference!.movie?.theaters[indexPath]
         if theater!.showTimes.count > 0 {
             for i in 0...theater!.showTimes.count - 1 {
                 let timeButton = UIButton(frame: CGRectZero)
@@ -66,7 +66,7 @@ class ShowtimeCell: UITableViewCell {
     
     func showMap() {
         
-        let theater = self.tableViewReference!.movie?.theaters[cellIndex!.row]
+        let theater = self.tableViewReference!.movie?.theaters[cellIndex]
         let coordinate = CLLocationCoordinate2D(latitude: Double(theater!.lat), longitude: Double(theater!.long))
         let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinate, addressDictionary:nil))
         mapItem.name = theater!.name

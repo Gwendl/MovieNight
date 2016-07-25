@@ -81,7 +81,7 @@ class MovieNightAPI {
         
             self.request("showtimelist", params: ["partner": partnerKey, "count": "20",
                 "lat": "\(locValue.latitude)", "long": "\(locValue.longitude)", "profile": "medium",
-                "radius": "10", "movie": "\(code)"], callBack: callBack)
+                "radius": "20", "movie": "\(code)"], callBack: callBack)
         } else {
             
             /* TODO: complete this never

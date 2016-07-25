@@ -56,7 +56,7 @@ class DetailTableViewController: UITableViewController {
         }
         
         cell.tableViewReference = self
-        cell.configureCell(indexPath)
+        cell.configureCell(indexPath.row - 1)
         return cell
     }
     
